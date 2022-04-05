@@ -22,7 +22,7 @@ public class Test {
             }
 
 
-            else if (args.equals("NutKanutKanut"))
+            else if (argStr.equals("NutKanutKanut"))
             {
                 System.out.println("WaNiba");
             }

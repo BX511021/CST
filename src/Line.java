@@ -49,7 +49,7 @@ public class Line {
 
         public void add_station(String Station_name,int Station_far) {
                 if(this.Line_map.get(Station_name)!=null){
-//                        System.out.println("Station duplicate");
+                        System.out.println("Station duplicate");
                         return;
                 }
                 this.Line_map.put(Station_name,Station_far);
@@ -63,7 +63,6 @@ public class Line {
                 }
                 this.Line_map.remove(Station_name);
                 System.out.println("Delete Station success");
-
         }
 
         @Override

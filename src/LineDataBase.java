@@ -1,5 +1,7 @@
+import java.net.Inet4Address;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Set;
 
 class LineDataBase {
     private ArrayList<Line> Line_List;
@@ -13,11 +15,8 @@ class LineDataBase {
 
     public boolean isExist(int line_id)
     {
-        Iterator<Line> it = this.Line_List.iterator();
-        while(it.hasNext())
-        {
-            Line temp_line = it.next();
-            if(line_id==(temp_line.getLine_id()))
+        for (Line temp_line : this.Line_List) {
+            if (line_id == (temp_line.getLine_id()))
                 return true;
         }
         return false;
@@ -72,12 +71,78 @@ class LineDataBase {
                 return;
             }
         }catch (NumberFormatException e){
-
             System.out.println("Arguments illegal");
             return;
 
         }
+    }
+
+    public void add_station(String[] args_line){
+        try {
+            if (!isExist(Integer.parseInt(args_line[1]))){
+                System.out.println("Line does not exist");
+                return;
+            }
+
+            Iterator<Line> it = this.Line_List.iterator();
+            int num=0;
+            while(it.hasNext())
+            {
+                Line temp_line = it.next();
+                if(Integer.parseInt(args_line[1])==temp_line.getLine_id()){
+                    temp_line.add_station(args_line[2], Integer.parseInt(args_line[3]));
+                    Line_List.set(num,temp_line);
+                    return;
+                }
+                num++;
+
+            }
+        }catch (NumberFormatException e){
+            System.out.println("Arguments illegal");
+            return;
+        }
+    }
+    public void del_station(String[] args_line){
+        try {
+            if (!isExist(Integer.parseInt(args_line[1]))){
+                System.out.println("Line does not exist");
+                return;
+            }
+
+            Iterator<Line> it = this.Line_List.iterator();
+            int num=0;
+            while(it.hasNext())
+            {
+                Line temp_line = it.next();
+
+                if(Integer.parseInt(args_line[1])==temp_line.getLine_id()){
+                    {
+                        temp_line.delete_station(args_line[2]);
+                        Line_List.set(num,temp_line);
+                        return;
+                    }
+                }
+                num++;
+
+            }
+        }catch (NumberFormatException e){
+            System.out.println("Arguments illegal");
+            return;
+        }
+    }
 
 
+
+    @Override
+    public String toString() {
+        for (Line temp_line : this.Line_List) {
+            System.out.print("[" + temp_line.getLine_id() + "] [" + temp_line.getContent()+"] ");
+            Set<String> names = temp_line.getLine_map().keySet();
+            for (String key : names) {
+                System.out.print("[" + key + "] [" + temp_line.getLine_map().get(key) + "] ");
+            }
+            System.out.println(" ");
+        }
+        return "";
     }
 }

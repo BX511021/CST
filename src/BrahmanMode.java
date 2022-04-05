@@ -10,7 +10,7 @@ public class BrahmanMode {
             argStr = cin.nextLine();
             String[] argline = argStr.split(" ");
             //超级管理员的控制操作
-            if (argline[0].equals("addLine")||argline[0].equals("delLine")||argline[0].equals("addStation")||argline[0].equals("delStation"))
+            if (argline[0].equals("addLine")||argline[0].equals("delLine")||argline[0].equals("addStation")||argline[0].equals("delStation")||argline[0].equals("listLine"))
             {
                 LineControl.Brahman_Run(argline ,lineDataBase);
             }
@@ -51,6 +51,17 @@ class LineControl{
         else if (argsline[0].equals("delLine"))
         {
             lineDataBase.delete_Line(argsline);
+        }
+
+        else if (argsline[0].equals("addStation")){
+            lineDataBase.add_station(argsline);
+
+        }
+        else if (argsline[0].equals("delStation")){
+            lineDataBase.del_station(argsline);
+        }
+        else if (argsline[0].equals("listLine")){
+            System.out.println(lineDataBase.toString());
         }
 
     }
