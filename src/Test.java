@@ -61,10 +61,12 @@ class User {
 class UserDatabase {
     private ArrayList<User> userArray;
     public UserDatabase(){
+
         this.userArray = new ArrayList<>();
     }
     public boolean isEmpty()
     {
+
         return this.userArray.isEmpty();
     }
     public boolean addUser(String[] args)
