@@ -13,7 +13,11 @@ public class Test {
             if (argStr.equals("QUIT")) {
                 System.out.println("----- Good Bye! -----");
                 System.exit(0);
-            } else {
+            }else if (argStr.equals("TunakTunakTun"))
+            {
+                BrahmanMode.Brahman_Go();
+            }
+            else {
                 String[] argline = argStr.split(" ");
                 userDatabase.addUser(argline);
             }
@@ -24,5 +28,7 @@ public class Test {
 
     }
 }
+
+
 
 
