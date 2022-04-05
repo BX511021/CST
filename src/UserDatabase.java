@@ -1,70 +1,17 @@
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Scanner;
 
-
-public class demo1 {
-    public static void main(String[] args) {
-        UserDatabase2 userDatabase = new UserDatabase2();
-        Scanner scan = new Scanner(System.in);
-        String argStr;
-        while (scan.hasNextLine()) {
-            argStr = scan.nextLine();
-            if (argStr.equals("QUIT")) {
-                System.out.println("----- Good Bye! -----");
-                System.exit(0);
-            } else {
-                String[] argline = argStr.split(" ");
-                userDatabase.addUser(argline);
-            }
-
-        }
-        scan.close();
-    }
-}
-class User2 {
-        private String name;
-        private char gender;
-        private String aadharrId;
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public void setGender(char gender) {
-            this.gender = gender;
-        }
-
-        public void setID(String aadharrId) {
-            this.aadharrId = aadharrId;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public char getGender() {
-            return gender;
-        }
-
-        public String getID() {
-            return aadharrId;
-        }
-
-        public String toString() {
-            return new String("Name:" + this.name + "\nSex:" + this.gender + "\nAadhaar:" + this.aadharrId);
-        }
-    }
-
-    class UserDatabase2 {
+    class UserDatabase {
+        // π”√¡–±Ì¿¥Ω¯––π‹¿Ì∫ÕºÏ≤È
         private ArrayList<User> userArray;
-        public UserDatabase2(){
+        public UserDatabase(){
+
             this.userArray = new ArrayList<>();
         }
+        //ºÏ≤È «∑ÒŒ™ø’
         public boolean isEmpty()
         {
+
             return this.userArray.isEmpty();
         }
         public boolean addUser(String[] args)
@@ -77,7 +24,7 @@ class User2 {
             String name = args[1];
             char gender = args[2].toCharArray()[0];
             String aadharrId = args[3];
-            //Ê£ÄÊü•ÂßìÂêçÊ†ºÂºè
+            //ºÏ≤È–’√˚∏Ò Ω
             char[] names = name.toCharArray();
             for(int i=0;i<name.length();i++)
             {
@@ -89,13 +36,13 @@ class User2 {
                     return false;
                 }
             }
-            //Ê£ÄÊü•ÊÄßÂà´Ê†ºÂºè
+            //ºÏ≤È–‘±∏Ò Ω
             if(gender!='F'&&gender!='M'&&gender!='O')
             {
                 System.out.println("Sex illegal");
                 return false;
             }
-            //Ê£ÄÊü•IDÊ†ºÂºè
+            //ºÏ≤ÈID∏Ò Ω
             int region = Integer.parseInt(aadharrId.substring(0,4));
             int category = Integer.parseInt(aadharrId.substring(4,8));
             int biology = Integer.parseInt(aadharrId.substring(8,11));
