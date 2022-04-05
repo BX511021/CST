@@ -19,7 +19,7 @@ public class BrahmanMode {
 
             else if (argStr.equals("addTrain"))
             {
-                TrainControl.RunIt();
+                TrainControl.Brahman_Run();
             }
 
 
@@ -45,12 +45,18 @@ class LineControl{
     public static void Brahman_Run(){
         System.out.println("Liner Control Run");
     }
+    public static void Dalit_Run(){
+        System.out.println("oh Poor Dalit");
+    }
 }
 
 class TrainControl{
-    public static void RunIt(){
+    public static void Brahman_Run(){
         System.out.println("Train Control Run");
-        return;
+
+    }
+    public static void Dalit_Run(){
+        System.out.println("Ohh poor Dalit");
     }
 }
 
