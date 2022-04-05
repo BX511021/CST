@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class BrahmanMode {
-    public static void Brahman_Go(){
+    public static void Brahman_Go(LineDataBase lineDataBase){
         System.out.print("Super Brahman Lets Go");
         System.out.println("DuluDulu");
         Scanner cin = new Scanner(System.in);
@@ -9,11 +9,10 @@ public class BrahmanMode {
         while (cin.hasNextLine()) {
             argStr = cin.nextLine();
             String[] argline = argStr.split(" ");
-
-
+            //超级管理员的控制操作
             if (argline[0].equals("addLine")||argline[0].equals("delLine")||argline[0].equals("addStation")||argline[0].equals("delStation"))
             {
-                LineControl.Brahman_Run();
+                LineControl.Brahman_Run(argline ,lineDataBase);
             }
 
 
@@ -42,8 +41,18 @@ public class BrahmanMode {
 }
 
 class LineControl{
-    public static void Brahman_Run(){
-        System.out.println("Liner Control Run");
+    public static void Brahman_Run(String[] argsline,LineDataBase lineDataBase){
+
+        if (argsline[0].equals("addLine"))
+        {
+            lineDataBase.add_Line(argsline);
+        }
+
+        else if (argsline[0].equals("delLine"))
+        {
+            lineDataBase.delete_Line(argsline);
+        }
+
     }
     public static void Dalit_Run(){
         System.out.println("oh Poor Dalit");

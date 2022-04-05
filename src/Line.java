@@ -16,6 +16,9 @@ public class Line {
                 Line_map = line_map;
         }
 
+        public Line() {
+        }
+
         public String getLine_name() {
                 return Line_name;
         }
@@ -45,8 +48,8 @@ public class Line {
         }
 
         public void add_station(String Station_name,int Station_far) {
-                if(this.Line_map.get(Station_name)==null){
-                        System.out.println("Station duplicate");
+                if(this.Line_map.get(Station_name)!=null){
+//                        System.out.println("Station duplicate");
                         return;
                 }
                 this.Line_map.put(Station_name,Station_far);

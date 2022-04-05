@@ -63,6 +63,7 @@ import java.util.Iterator;
             newUser.setName(name);
             newUser.setGender(gender);
             newUser.setID(aadharrId);
+
             this.userArray.add(newUser);
             System.out.println(newUser);
             return true;

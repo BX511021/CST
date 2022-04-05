@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class Test {
     public static void main(String[] args){
         UserDatabase userDatabase = new UserDatabase();
+        LineDataBase lineDataBase = new LineDataBase();
         Scanner scan = new Scanner(System.in);
         String argStr;
         while (scan.hasNextLine()) {
@@ -17,7 +18,7 @@ public class Test {
 
             else if (argStr.equals("TunakTunakTun"))
             {
-                BrahmanMode.Brahman_Go();
+                BrahmanMode.Brahman_Go(lineDataBase);
             }
 
 
