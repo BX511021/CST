@@ -13,10 +13,20 @@ public class Test {
             if (argStr.equals("QUIT")) {
                 System.out.println("----- Good Bye! -----");
                 System.exit(0);
-            }else if (argStr.equals("TunakTunakTun"))
+            }
+
+            else if (argStr.equals("TunakTunakTun"))
             {
                 BrahmanMode.Brahman_Go();
             }
+
+
+            else if (args.equals("NutKanutKanut"))
+            {
+                System.out.println("WaNiba");
+            }
+
+
             else {
                 String[] argline = argStr.split(" ");
                 userDatabase.addUser(argline);

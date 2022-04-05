@@ -8,12 +8,28 @@ public class BrahmanMode {
         String argStr;
         while (cin.hasNextLine()) {
             argStr = cin.nextLine();
-            if (argStr.equals("addStation")) {
-                LineControl.runIt();
-            }else if (argStr.equals("addTrain"))
+            String[] argline = argStr.split(" ");
+
+
+            if (argline[0].equals("addLine")||argline[0].equals("delLine")||argline[0].equals("addStation")||argline[0].equals("delStation"))
+            {
+                LineControl.Brahman_Run();
+            }
+
+
+            else if (argStr.equals("addTrain"))
             {
                 TrainControl.RunIt();
             }
+
+
+
+            else if (argStr.equals("TunakTunakTun"))
+            {
+                System.out.println("WaNiBa");
+            }
+
+
             else if (argStr.equals("NutKanutKanut")){
                 System.out.println("DaDaDa");
                 return ;
@@ -26,9 +42,8 @@ public class BrahmanMode {
 }
 
 class LineControl{
-    public static void runIt(){
+    public static void Brahman_Run(){
         System.out.println("Liner Control Run");
-        return;
     }
 }
 
@@ -38,3 +53,5 @@ class TrainControl{
         return;
     }
 }
+
+
