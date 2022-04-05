@@ -135,13 +135,14 @@ class LineDataBase {
 
     @Override
     public String toString() {
+        int num=1;
         for (Line temp_line : this.Line_List) {
-            System.out.print("[" + temp_line.getLine_id() + "] [" + temp_line.getContent()+"] ");
+            System.out.print("["+num+"] "+"[" + temp_line.getLine_id() + "] [" + temp_line.getContent()+"] ");
             Set<String> names = temp_line.getLine_map().keySet();
             for (String key : names) {
-                System.out.print("[" + key + "] [" + temp_line.getLine_map().get(key) + "] ");
+                System.out.print(key + ":" + temp_line.getLine_map().get(key) +" ");
             }
-            System.out.println(" ");
+            System.out.println("");
         }
         return null;
     }

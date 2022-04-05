@@ -10,7 +10,11 @@ public class BrahmanMode {
             argStr = cin.nextLine();
             String[] argline = argStr.split(" ");
             //超级管理员的控制操作
-            if (argline[0].equals("addLine")||argline[0].equals("delLine")||argline[0].equals("addStation")||argline[0].equals("delStation")||argline[0].equals("listLine"))
+            if (argline[0].equals("addLine")||
+                    argline[0].equals("delLine")||
+                    argline[0].equals("addStation")||
+                    argline[0].equals("delStation")||
+                    argline[0].equals("listLine"))
             {
                 LineControl.Brahman_Run(argline ,lineDataBase);
             }
