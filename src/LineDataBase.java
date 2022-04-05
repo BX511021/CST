@@ -143,6 +143,6 @@ class LineDataBase {
             }
             System.out.println(" ");
         }
-        return "";
+        return null;
     }
 }

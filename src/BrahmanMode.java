@@ -61,7 +61,7 @@ class LineControl{
             lineDataBase.del_station(argsline);
         }
         else if (argsline[0].equals("listLine")){
-            System.out.println(lineDataBase.toString());
+            lineDataBase.toString();
         }
 
     }
