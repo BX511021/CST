@@ -6,6 +6,7 @@ public class Line {
         private String  Line_id;
         private int content;
         private int train_num=0;
+
         //使用Map的方式来存储站点相关信息
         private Map<String ,Integer> Line_map = new HashMap<>();
 //        Map<String, String> map = new TreeMap<String, String>(

@@ -1,6 +1,6 @@
 public class TrainControl {
     public static void Brahman_Run() {
-        System.out.println("Train Control Run");
+        System.out.println("Train_type.Train Control Run");
 
     }
 
