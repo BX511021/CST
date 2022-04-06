@@ -11,6 +11,7 @@ public class Test {
         String argStr;
         while (scan.hasNextLine()) {
             argStr = scan.nextLine();
+            String[] argline = argStr.split(" ");
             if (argStr.equals("QUIT")) {
                 System.out.println("----- Good Bye! -----");
                 System.exit(0);
@@ -26,10 +27,13 @@ public class Test {
             {
                 System.out.println("WaNiba");
             }
+            else if(argline[0].equals("lineInfo")){
+                LineControl.Brahman_Run(argline,lineDataBase);
+            }
 
 
             else {
-                String[] argline = argStr.split(" ");
+
                 userDatabase.addUser(argline);
             }
 

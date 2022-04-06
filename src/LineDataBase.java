@@ -1,7 +1,5 @@
 import java.net.Inet4Address;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 class LineDataBase {
     private ArrayList<Line> Line_List;
@@ -13,10 +11,10 @@ class LineDataBase {
        return this.Line_List.isEmpty();
     }
 
-    public boolean isExist(int line_id)
+    public boolean isExist(String  line_id)
     {
         for (Line temp_line : this.Line_List) {
-            if (line_id == (temp_line.getLine_id()))
+            if (Objects.equals(line_id, temp_line.getLine_id()))
                 return true;
         }
         return false;
@@ -25,12 +23,12 @@ class LineDataBase {
     public void add_Line(String[] args_line){
 
             Line lin1=new Line();
-            if (isExist(Integer.parseInt(args_line[1]))){
+            if (isExist((args_line[1]))){
                 System.out.println("Line already exists");
                 return;
             }
             try {
-                int id=Integer.parseInt(args_line[1]);
+                String  id=(args_line[1]);
                 int content = Integer.parseInt(args_line[2]);
                 lin1.setLine_id(id);
                 lin1.setContent(content);
@@ -56,7 +54,7 @@ class LineDataBase {
     public void delete_Line(String[] args_Line){
 
         try {
-            if (!isExist(Integer.parseInt(args_Line[1]))){
+            if (!isExist((args_Line[1]))){
                 System.out.println("Line does not exist");
                 return;
             }
@@ -65,7 +63,7 @@ class LineDataBase {
             while(it.hasNext())
             {
                 Line temp_line = it.next();
-                if(Integer.parseInt(args_Line[1])==(temp_line.getLine_id()))
+                if(Objects.equals(args_Line[1], temp_line.getLine_id()))
                     it.remove();
                 System.out.println("Del Line success");
                 return;
@@ -79,7 +77,7 @@ class LineDataBase {
 
     public void add_station(String[] args_line){
         try {
-            if (!isExist(Integer.parseInt(args_line[1]))){
+            if (!isExist((args_line[1]))){
                 System.out.println("Line does not exist");
                 return;
             }
@@ -89,7 +87,7 @@ class LineDataBase {
             while(it.hasNext())
             {
                 Line temp_line = it.next();
-                if(Integer.parseInt(args_line[1])==temp_line.getLine_id()){
+                if(Objects.equals(args_line[1], temp_line.getLine_id())){
                     temp_line.add_station(args_line[2], Integer.parseInt(args_line[3]));
                     Line_List.set(num,temp_line);
                     return;
@@ -104,7 +102,7 @@ class LineDataBase {
     }
     public void del_station(String[] args_line){
         try {
-            if (!isExist(Integer.parseInt(args_line[1]))){
+            if (!isExist((args_line[1]))){
                 System.out.println("Line does not exist");
                 return;
             }
@@ -115,7 +113,7 @@ class LineDataBase {
             {
                 Line temp_line = it.next();
 
-                if(Integer.parseInt(args_line[1])==temp_line.getLine_id()){
+                if(Objects.equals(args_line[1], temp_line.getLine_id())){
                     {
                         temp_line.delete_station(args_line[2]);
                         Line_List.set(num,temp_line);
@@ -132,9 +130,43 @@ class LineDataBase {
     }
 
 
+    public void list_it(String[] args_line) {
+        try {
+            if (!isExist((args_line[1]))) {
+                System.out.println("Line does not exist");
+                return;
+            }
+            for (Line temp_line : this.Line_List) {
+                if (Objects.equals(args_line[1], temp_line.getLine_id())) {
+                    {
+                        temp_line.toString();
+                        return;
+                    }
+                }
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Arguments illegal");
+            return;
+        }
+//        System.out.println("Change Success");
 
-    @Override
-    public String toString() {
+    }
+
+
+
+    public void List_all() {
+        if (isEmpty()){
+            System.out.println("No Lines");
+            return;
+        }
+
+        Collections.sort(this.Line_List, new Comparator<Line>() {
+            @Override
+            public int compare(Line o1, Line o2) {
+                return o1.getLine_id().compareTo(o2.getLine_id());
+            }
+        });
+
         int num=1;
         for (Line temp_line : this.Line_List) {
             System.out.print("["+num+"] "+"[" + temp_line.getLine_id() + "] [" + temp_line.getContent()+"] ");
@@ -143,7 +175,8 @@ class LineDataBase {
                 System.out.print(key + ":" + temp_line.getLine_map().get(key) +" ");
             }
             System.out.println("");
+            num++;
         }
-        return null;
+        return ;
     }
 }

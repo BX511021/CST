@@ -2,7 +2,9 @@ import java.util.Scanner;
 
 public class BrahmanMode {
     public static void Brahman_Go(LineDataBase lineDataBase){
-        System.out.print("Super Brahman Lets Go");
+        System.out.println("Come!!On!!!");
+        System.out.print("Super Brahman ");
+        System.out.println("Go!!");
         System.out.println("DuluDulu");
         Scanner cin = new Scanner(System.in);
         String argStr;
@@ -14,7 +16,8 @@ public class BrahmanMode {
                     argline[0].equals("delLine")||
                     argline[0].equals("addStation")||
                     argline[0].equals("delStation")||
-                    argline[0].equals("listLine"))
+                    argline[0].equals("listLine")||
+                    argline[0].equals("lineInfo"))
             {
                 LineControl.Brahman_Run(argline ,lineDataBase);
             }
@@ -41,46 +44,6 @@ public class BrahmanMode {
         }
         cin.close();
 
-    }
-}
-
-class LineControl{
-    public static void Brahman_Run(String[] argsline,LineDataBase lineDataBase){
-
-        if (argsline[0].equals("addLine"))
-        {
-            lineDataBase.add_Line(argsline);
-        }
-
-        else if (argsline[0].equals("delLine"))
-        {
-            lineDataBase.delete_Line(argsline);
-        }
-
-        else if (argsline[0].equals("addStation")){
-            lineDataBase.add_station(argsline);
-
-        }
-        else if (argsline[0].equals("delStation")){
-            lineDataBase.del_station(argsline);
-        }
-        else if (argsline[0].equals("listLine")){
-            lineDataBase.toString();
-        }
-
-    }
-    public static void Dalit_Run(){
-        System.out.println("oh Poor Dalit");
-    }
-}
-
-class TrainControl{
-    public static void Brahman_Run(){
-        System.out.println("Train Control Run");
-
-    }
-    public static void Dalit_Run(){
-        System.out.println("Ohh poor Dalit");
     }
 }
 
