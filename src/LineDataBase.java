@@ -21,6 +21,12 @@ class LineDataBase {
     }
 
     public void add_Line(String[] args_line){
+        double d =args_line.length;
+        if(d%2.0!=1.0)
+        {
+            System.out.println("Arguments illegal Ohh!");
+            return;
+        }
 
             Line lin1=new Line();
             if (isExist((args_line[1]))){
@@ -30,17 +36,24 @@ class LineDataBase {
             try {
                 String  id=(args_line[1]);
                 int content = Integer.parseInt(args_line[2]);
-                lin1.setLine_id(id);
-                lin1.setContent(content);
+
+                int miles;
+
 
                 if (content<=0){
                     System.out.println("Capacity illegal");
                     return;
                 }
+                for (int i=3;i<args_line.length;i=i+2){
+                   miles=Integer.parseInt(args_line[i+1]);
+                }
 
                 for (int i=3;i<args_line.length;i=i+2){
                     lin1.add_station(args_line[i],Integer.parseInt(args_line[i+1]));
                 }
+                lin1.setLine_id(id);
+                lin1.setContent(content);
+
             }catch (NumberFormatException e){
                 System.out.println("Arguments illegal");
                 return;
@@ -52,6 +65,10 @@ class LineDataBase {
 
 
     public void delete_Line(String[] args_Line){
+        if (args_Line.length!=2){
+            System.out.println("Arguments illegal");
+            return;
+        }
 
         try {
             if (!isExist((args_Line[1]))){
@@ -76,6 +93,10 @@ class LineDataBase {
     }
 
     public void add_station(String[] args_line){
+        if(args_line.length!=4){
+            System.out.println("Arguments illegal");
+            return;
+        }
         try {
             if (!isExist((args_line[1]))){
                 System.out.println("Line does not exist");
@@ -101,6 +122,10 @@ class LineDataBase {
         }
     }
     public void del_station(String[] args_line){
+        if(args_line.length!=3){
+            System.out.println("Arguments illegal");
+            return;
+        }
         try {
             if (!isExist((args_line[1]))){
                 System.out.println("Line does not exist");
@@ -131,6 +156,10 @@ class LineDataBase {
 
 
     public void list_it(String[] args_line) {
+        if (args_line.length!=2){
+            System.out.println("Arguments illegal");
+            return;
+        }
         try {
             if (!isExist((args_line[1]))) {
                 System.out.println("Line does not exist");
@@ -154,7 +183,13 @@ class LineDataBase {
 
 
 
-    public void List_all() {
+    public void List_all(String[] args_line) {
+        if (args_line.length!=1){
+
+            System.out.println("Arguments illegal");
+            return;
+        }
+
         if (isEmpty()){
             System.out.println("No Lines");
             return;
@@ -166,15 +201,10 @@ class LineDataBase {
                 return o1.getLine_id().compareTo(o2.getLine_id());
             }
         });
-
         int num=1;
         for (Line temp_line : this.Line_List) {
-            System.out.print("["+num+"] "+"[" + temp_line.getLine_id() + "] [" + temp_line.getContent()+"] ");
-            Set<String> names = temp_line.getLine_map().keySet();
-            for (String key : names) {
-                System.out.print(key + ":" + temp_line.getLine_map().get(key) +" ");
-            }
-            System.out.println("");
+            System.out.print("["+num+"] ");
+            temp_line.toString();
             num++;
         }
         return ;

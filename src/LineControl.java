@@ -11,14 +11,19 @@ public class LineControl {
         } else if (argsline[0].equals("delStation")) {
             lineDataBase.del_station(argsline);
         } else if (argsline[0].equals("listLine")) {
-            lineDataBase.List_all();
+            lineDataBase.List_all(argsline);
         } else if (argsline[0].equals("lineInfo")) {
             lineDataBase.list_it(argsline);
         }
 
     }
 
-    public static void Dalit_Run() {
+    public static void Dalit_Run(String[] argsline,LineDataBase lineDataBase) {
         System.out.println("oh Poor Dalit");
+      if (argsline[0].equals("listLine")) {
+        lineDataBase.List_all(argsline);
+    } else if (argsline[0].equals("lineInfo")) {
+        lineDataBase.list_it(argsline);
+    }
     }
 }

@@ -22,14 +22,17 @@ public class Test {
                 BrahmanMode.Brahman_Go(lineDataBase);
             }
 
+            else if(argline[0].equals("lineInfo")||
+                    argline[0].equals("listLine")){
+                LineControl.Dalit_Run(argline,lineDataBase);
+            }
 
             else if (argStr.equals("NutKanutKanut"))
             {
                 System.out.println("WaNiba");
             }
-            else if(argline[0].equals("lineInfo")){
-                LineControl.Brahman_Run(argline,lineDataBase);
-            }
+
+
 
 
             else {
