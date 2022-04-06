@@ -49,7 +49,7 @@ class LineDataBase {
                 }
 
                 for (int i=3;i<args_line.length;i=i+2){
-                    lin1.add_station(args_line[i],Integer.parseInt(args_line[i+1]));
+                    lin1.add_station(args_line[i],Integer.parseInt(args_line[i+1]),false);
                 }
                 lin1.setLine_id(id);
                 lin1.setContent(content);
@@ -109,7 +109,7 @@ class LineDataBase {
             {
                 Line temp_line = it.next();
                 if(Objects.equals(args_line[1], temp_line.getLine_id())){
-                    temp_line.add_station(args_line[2], Integer.parseInt(args_line[3]));
+                    temp_line.add_station(args_line[2], Integer.parseInt(args_line[3]),true);
                     Line_List.set(num,temp_line);
                     return;
                 }

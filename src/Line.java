@@ -65,13 +65,16 @@ public class Line {
                 this.train_num+=train_num;
         }
 
-        public void add_station(String Station_name, int Station_far) {
+        public void add_station(String Station_name, int Station_far,boolean b) {
                 if(this.Line_map.get(Station_name)!=null){
                         System.out.println("Station duplicate");
                         return;
                 }
                 this.Line_map.put(Station_name,Station_far);
-                System.out.println("Add Station success");
+                if(b){
+                        System.out.println("Add Station success");
+                }
+
         }
 
         public void delete_station (String Station_name){
