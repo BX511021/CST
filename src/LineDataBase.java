@@ -2,7 +2,7 @@ import java.net.Inet4Address;
 import java.util.*;
 
 class LineDataBase {
-    private ArrayList<Line> Line_List;
+    public ArrayList<Line> Line_List;
     public LineDataBase() {
         this.Line_List= new ArrayList<>();
 
@@ -18,6 +18,15 @@ class LineDataBase {
                 return true;
         }
         return false;
+    }
+
+    public Line line_isExist(String  line_id)
+    {
+        for (Line temp_line : this.Line_List) {
+            if (Objects.equals(line_id, temp_line.getLine_id()))
+                return temp_line;
+        }
+        return null;
     }
 
     public void add_Line(String[] args_line){
@@ -208,42 +217,79 @@ class LineDataBase {
         return ;
     }
 
-    public void add_train(String [] args_line){
-        if(!isExist(args_line[2])){
-            System.out.println("Line illegal");
-            return;
-        }
-        Iterator<Line> it = this.Line_List.iterator();
-        int num =0;
-        while(it.hasNext())
-        {
-            Line temp_line = it.next();
-            if(Objects.equals(args_line[2], temp_line.getLine_id())){
-                temp_line.add_train(args_line);
-                Line_List.set(num,temp_line);
-                return;
-            }
-            num++;
-
-        }
-
-
-
-    }
-
-    public void del_train(String [] args_line){
-
-        Iterator<Line> it = this.Line_List.iterator();
-        int num =0;
-        while(it.hasNext())
-        {
-            Line temp_line = it.next();
-            temp_line.del_train(args_line);
-            Line_List.set(num,temp_line);
-            num++;
-
-        }
-    }
+//    public void add_train(String [] args_line){
+//        if(!isExist(args_line[2])){
+//            System.out.println("Line illegal");
+//            return;
+//        }
+//        Iterator<Line> it = this.Line_List.iterator();
+//        int num =0;
+//        while(it.hasNext())
+//        {
+//            Line temp_line = it.next();
+//            if(Objects.equals(args_line[2], temp_line.getLine_id())){
+//                temp_line.add_train(args_line);
+//                Line_List.set(num,temp_line);
+//                return;
+//            }
+//            num++;
+//
+//        }
+//
+//
+//
+//    }
+//
+//    public void del_train(String [] args_line){
+//
+//        Iterator<Line> it = this.Line_List.iterator();
+//        int num =0;
+//        while(it.hasNext())
+//        {
+//            Line temp_line = it.next();
+//            temp_line.del_train(args_line);
+//            Line_List.set(num,temp_line);
+//            num++;
+//
+//        }
+//    }
+//
+//    public void list_train(String[] args_line){
+//        if(args_line.length==1){
+//            Iterator<Line> it = this.Line_List.iterator();
+//            int num =0;
+//            while(it.hasNext())
+//            {
+//                    Line temp_line = it.next();
+//                    temp_line.list_train(args_line);
+//
+//                }
+//                num++;
+//
+//            }
+//        else if (args_line.length==2){
+//            Iterator<Line> it = this.Line_List.iterator();
+//            int num =0;
+//            while(it.hasNext())
+//            {
+//                Line temp_line = it.next();
+//                if(Objects.equals(args_line[1], temp_line.getLine_id())){
+//                    temp_line.list_train(args_line);
+//                    return;
+//                }
+//                num++;
+//
+//            }
+//            return;
+//        }
+//        else {
+//            System.out.println("Arguments illegal");
+//            return;
+//        }
+//
+//
+//
+//    }
 
 
 }

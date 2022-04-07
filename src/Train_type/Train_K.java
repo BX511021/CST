@@ -1,5 +1,7 @@
 package Train_type;
 
+import java.util.Objects;
+
 public class Train_K extends Train {
     private int A1_price;
     private  int A1_num;
@@ -48,5 +50,37 @@ public class Train_K extends Train {
 
     public void setA2_num(int a2_num) {
         A2_num = a2_num;
+    }
+
+    public int get_price(String s) {
+        if (Objects.equals(s, "A1")) {
+            return this.getA1_price();
+        } else if (Objects.equals(s, "A2")) {
+            return this.getA2_price();
+        }
+         else {
+            return -8;
+        }
+
+    }
+    public int get_num(String s) {
+        if (Objects.equals(s, "A1")) {
+            return this.getA1_num();
+        } else if (Objects.equals(s, "A2")) {
+            return this.getA2_num();
+        }
+        else {
+            return -8;
+        }
+
+    }
+
+    @Override
+    public String toString() {
+        System.out.print("[A1]"+this.A1_price+":"+this.A1_num+" ");
+        System.out.print("[A2]"+this.A2_price+":"+this.A2_num+" ");
+
+        System.out.println("");
+        return null;
     }
 }

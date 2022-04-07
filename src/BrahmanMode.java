@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class BrahmanMode {
-    public static void Brahman_Go(LineDataBase lineDataBase){
+    public static void Brahman_Go(LineDataBase lineDataBase,TrainDataBase trainDataBase){
         System.out.println("Come!!On!!!");
         System.out.print("Super Brahman ");
         System.out.println("Go!!");
@@ -19,11 +19,14 @@ public class BrahmanMode {
                     argline[0].equals("listLine")||
                     argline[0].equals("lineInfo")||
                     argline[0].equals("addTrain")||
-                    argline[0].equals("delTrain"))
+                    argline[0].equals("delTrain")||
+                    argline[0].equals("listTrain"))
             {
-                LineControl.Brahman_Run(argline ,lineDataBase);
+                LineControl.Brahman_Run(argline ,lineDataBase,trainDataBase);
             }
-
+            else if(argline[0].equals("checkTicket")){
+                System.out.println("Command does not exist");
+            }
 
 
             else if (argStr.equals("TunakTunakTun"))
