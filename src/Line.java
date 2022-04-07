@@ -1,3 +1,5 @@
+import Train_type.Train;
+
 import java.util.*;
 
 public class Line {
@@ -6,6 +8,7 @@ public class Line {
         private String  Line_id;
         private int content;
         private int train_num=0;
+        private TrainDataBase trainDataBase;
 
         //使用Map的方式来存储站点相关信息
         private Map<String ,Integer> Line_map = new HashMap<>();
@@ -25,6 +28,7 @@ public class Line {
         }
 
         public Line() {
+                this.trainDataBase=new TrainDataBase();
         }
 
         public String getLine_name() {
@@ -62,8 +66,27 @@ public class Line {
         public int getTrain_num() {
                 return train_num;
         }
-        public void add_train(int train_num){
-                this.train_num+=train_num;
+
+        public void add_train(String [] args_line){
+                if (this.train_num<this.content){
+                        if (this.trainDataBase.add_train(args_line)){
+                                this.train_num++;
+                                return;
+                        }
+                }
+                else {
+                        System.out.println("Line illegal");
+                        return;
+                }
+
+        }
+        public void del_train(String[] args_line){
+
+                if (this.trainDataBase.del_train(args_line)){
+
+                        this.train_num--;
+                }
+
         }
 
         public void add_station(String Station_name, int Station_far,boolean b) {

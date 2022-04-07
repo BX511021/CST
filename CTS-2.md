@@ -125,15 +125,15 @@ CTS-2
 
   | 命令     | 参数1    | 参数2  | 参数3     | 参数4     | 参数5     | 参数6     | 参数7     | 参数8     | 功能描述                                                     |
   | -------- | -------- | ------ | --------- | --------- | --------- | --------- | --------- | --------- | ------------------------------------------------------------ |
-  | addTrain | 列车车次 | 线路号 | 坐席1票价 | 坐席1张数 | 坐席2票价 | 坐席2张数 | 坐席3票价 | 坐席3张数 | 添加一班列车，并指定线路、各个席别的每公里票价和余票张数。对于普通车，有效参数为1~8，坐席1、2、3分别为坐票、站票、挂票；对于“搬家”号，有效参数为1~8，坐席1、2、3分别为软座票、硬座票、站票；对于“旷野”号，有效参数为1~6，坐席1、2分别为一等座票、二等座票。若添加成功，则输出` Add Train Success` |
-  | delTrain | 列车车次 |        |           |           |           |           |           |           | 删除列车，若删除列车成功，则输出`Del Train Success`          |
+  | addTrain | 列车车次 | 线路号 | 坐席1票价 | 坐席1张数 | 坐席2票价 | 坐席2张数 | 坐席3票价 | 坐席3张数 | 添加一班列车，并指定线路、各个席别的每公里票价和余票张数。对于普通车，有效参数为1~8，坐席1、2、3分别为坐票、站票、挂票；对于“搬家”号，有效参数为1~8，坐席1、2、3分别为软座票、硬座票、站票；对于“旷野”号，有效参数为1~6，坐席1、2分别为一等座票、二等座票。若添加成功，则输出` Add Train_type.Train Success` |
+  | delTrain | 列车车次 |        |           |           |           |           |           |           | 删除列车，若删除列车成功，则输出`Del Train_type.Train Success`          |
   
   - 异常处理
   
     依次检验以下错误
   
-    - 列车号需符合规范，否则输出`Train serial illegal` 
-    - 添加列车时车次号不得重复，否则输出`Train serial duplicate`，删除列车时车次号必须存在，否则输出`Train does not exist`
+    - 列车号需符合规范，否则输出`Train_type.Train serial illegal` 
+    - 添加列车时车次号不得重复，否则输出`Train_type.Train serial duplicate`，删除列车时车次号必须存在，否则输出`Train_type.Train does not exist`
     - 线路号必须存在，且未达到负载上限，否则输出`Line illegal`
     - 票价具有实际意义，否则输出`Price illegal`
     - 张数具有实际意义，否则输出`Ticket num illegal`
@@ -158,8 +158,8 @@ CTS-2
   
   - 异常处理
   
-    - 列车号需符合规范，否则输出`Train serial illegal` 
-    - 车次号必须存在，否则输出`Train serial does not exist`
+    - 列车号需符合规范，否则输出`Train_type.Train serial illegal` 
+    - 车次号必须存在，否则输出`Train_type.Train serial does not exist`
 
     - 车站必须存在，否则输出`Station does not exist`
     - 席位必须与车次类型对应，否则输出`Seat does not match`

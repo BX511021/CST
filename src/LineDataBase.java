@@ -3,9 +3,9 @@ import java.util.*;
 
 class LineDataBase {
     private ArrayList<Line> Line_List;
-
     public LineDataBase() {
         this.Line_List= new ArrayList<>();
+
     }
     public boolean isEmpty(){
        return this.Line_List.isEmpty();
@@ -181,8 +181,6 @@ class LineDataBase {
 
     }
 
-
-
     public void List_all(String[] args_line) {
         if (args_line.length!=1){
 
@@ -209,4 +207,43 @@ class LineDataBase {
         }
         return ;
     }
+
+    public void add_train(String [] args_line){
+        if(!isExist(args_line[2])){
+            System.out.println("Line illegal");
+            return;
+        }
+        Iterator<Line> it = this.Line_List.iterator();
+        int num =0;
+        while(it.hasNext())
+        {
+            Line temp_line = it.next();
+            if(Objects.equals(args_line[2], temp_line.getLine_id())){
+                temp_line.add_train(args_line);
+                Line_List.set(num,temp_line);
+                return;
+            }
+            num++;
+
+        }
+
+
+
+    }
+
+    public void del_train(String [] args_line){
+
+        Iterator<Line> it = this.Line_List.iterator();
+        int num =0;
+        while(it.hasNext())
+        {
+            Line temp_line = it.next();
+            temp_line.del_train(args_line);
+            Line_List.set(num,temp_line);
+            num++;
+
+        }
+    }
+
+
 }

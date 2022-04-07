@@ -15,6 +15,12 @@ public class LineControl {
         } else if (argsline[0].equals("lineInfo")) {
             lineDataBase.list_it(argsline);
         }
+        else if (argsline[0].equals("addTrain")){
+            lineDataBase.add_train(argsline);
+        }
+        else if (argsline[0].equals("delTrain")){
+            lineDataBase.del_train(argsline);
+        }
 
     }
 

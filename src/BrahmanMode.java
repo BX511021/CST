@@ -17,15 +17,11 @@ public class BrahmanMode {
                     argline[0].equals("addStation")||
                     argline[0].equals("delStation")||
                     argline[0].equals("listLine")||
-                    argline[0].equals("lineInfo"))
+                    argline[0].equals("lineInfo")||
+                    argline[0].equals("addTrain")||
+                    argline[0].equals("delTrain"))
             {
                 LineControl.Brahman_Run(argline ,lineDataBase);
-            }
-
-
-            else if (argStr.equals("addTrain"))
-            {
-                TrainControl.Brahman_Run();
             }
 
 
