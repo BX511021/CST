@@ -22,9 +22,50 @@ public class TrainDataBase {
         return false;
     }
 
+    public boolean legal_train(String train_id){
+
+        if(train_id.charAt(0)!='K'&&train_id.charAt(0)!='G'&&train_id.charAt(0)!='0'){
+            return false;
+        }
+        if (train_id.length()!=5){
+            return false;
+        }
+        for (int i=1;i<=4;i++){
+            if(!Character.isDigit(train_id.charAt(i))){
+                return false;
+            }
+        }
+
+        return true;
+
+    }
+
     public void   add_train(String [] args_line,LineDataBase lineDataBase){
 
         try {
+            //车号符合规范
+            Train train = new Train(args_line[1]);
+            if (!legal_train(train.Train_id)){
+                System.out.println("Train_type.Train serial illegal");
+                return;
+            }
+
+            //车号是否存在
+            if (isExist(train.Train_id))
+            {
+                System.out.println("Train_type.Train serial duplicate");
+                return ;
+            }
+            //检查负载，并且加一
+            Line line=lineDataBase.line_isExist(args_line[2]);
+            if (line!=null&& Objects.requireNonNull(line).train_num<line.content){
+                ;
+            }
+            else {
+                System.out.println("Line illegal");
+                return ;
+            }
+            //检查票价和张数
             int i,j;
             for (i=3;i<args_line.length;i++){
                 j=Integer.parseInt(args_line[i]);
@@ -41,29 +82,12 @@ public class TrainDataBase {
                 }
             }
 
-
-            Train train = new Train(args_line[1]);
-            if (isExist(train.Train_id))
-            {
-                System.out.println("Train_type.Train serial duplicate");
-                return ;
-            }
-
-
+            //开始操作
             if(train.Train_id.charAt(0)=='K'){
 
                 if(args_line.length!=7)
                 {
                     System.out.println("Train_type.Train serial illegal");
-                    return ;
-                }
-
-                Line line=lineDataBase.line_isExist(args_line[2]);
-                if (line!=null&& Objects.requireNonNull(line).train_num<line.content){
-                    lineDataBase.line_isExist(args_line[2]).train_num++;
-                }
-                else {
-                    System.out.println("Line illegal");
                     return ;
                 }
 
@@ -78,6 +102,7 @@ public class TrainDataBase {
                 train1.setA2_num(Integer.parseInt(args_line[6]));
 
                 Train_list.add(train1);
+                lineDataBase.line_isExist(args_line[2]).train_num++;
                 System.out.println("Train_type.Train Success");
 
 
@@ -90,14 +115,7 @@ public class TrainDataBase {
                     return ;
                 }
 
-                Line line=lineDataBase.line_isExist(args_line[2]);
-                if (line!=null&& Objects.requireNonNull(line).train_num<line.content){
-                    lineDataBase.line_isExist(args_line[2]).train_num++;
-                }
-                else {
-                    System.out.println("Line illegal");
-                    return ;
-                }
+
 
                 Train_0 train1=new Train_0(train.Train_id);
 
@@ -112,9 +130,8 @@ public class TrainDataBase {
                 train1.setGG_price(Integer.parseInt(args_line[7]));
                 train1.setGG_num(Integer.parseInt(args_line[8]));
 
-
-
                 Train_list.add(train1);
+                lineDataBase.line_isExist(args_line[2]).train_num++;
                 System.out.println("Train_type.Train Success");
             }else if (train.Train_id.charAt(0)=='G'){
 
@@ -123,14 +140,7 @@ public class TrainDataBase {
                     System.out.println("Train_type.Train serial illegal");
                     return ;
                 }
-                Line line=lineDataBase.line_isExist(args_line[2]);
-                if (line!=null&& Objects.requireNonNull(line).train_num<line.content){
-                    lineDataBase.line_isExist(args_line[2]).train_num++;
-                }
-                else {
-                    System.out.println("Line illegal");
-                    return ;
-                }
+
                 Train_G train1 =new Train_G(train.Train_id);
 
                 train1.setT_line_id(args_line[2]);
@@ -145,6 +155,7 @@ public class TrainDataBase {
                 train1.setSB_num(Integer.parseInt(args_line[8]));
 
                 Train_list.add(train1);
+                lineDataBase.line_isExist(args_line[2]).train_num++;
                 System.out.println("Train_type.Train Success");
 
             }
@@ -251,13 +262,17 @@ public class TrainDataBase {
                         Train temp_train=it.next();
                         Line temp_line=lineDataBase.line_isExist(temp_train.T_line_id);
                         if(temp_train.Train_id.equals(args_line[1])){
-                                if (temp_train.get_num(args_line[4])!=-8&&temp_train.get_price(args_line[4])!=-8){
+                                if (temp_train.get_num(args_line[4])!=-8&&temp_train.get_price(args_line[4])!=-8)
+
+                                {       String Price;
+                                        int distance;
+                                        distance=Math.abs(temp_line.Line_map.get(args_line[2])-temp_line.Line_map.get(args_line[3]));
+                                        Price=new java.text.DecimalFormat("#.00").format(distance*temp_train.get_price(args_line[4]));
                                         System.out.println("["+temp_train.Train_id+": "+args_line[2]+"->"+args_line[3]+"] seat:"+args_line[4]+" remain:"+temp_train.get_num(args_line[4])
-                                        +" distance:"+Math.abs(temp_line.Line_map.get(args_line[2])-temp_line.Line_map.get(args_line[3]))+" price:"+temp_train.get_price(args_line[4]));
+                                        +" distance:"+distance+" price:"+Price);
                                         return;
                                 }else
                                 {
-
                                     System.out.println("Seat does not match");
                                 }
                         }

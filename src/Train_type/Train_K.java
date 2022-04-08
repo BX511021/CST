@@ -3,9 +3,9 @@ package Train_type;
 import java.util.Objects;
 
 public class Train_K extends Train {
-    private int A1_price;
+    private double A1_price;
     private  int A1_num;
-    private  int A2_price;
+    private  double A2_price;
     private int A2_num;
 
     public Train_K(String train_id, int a1_price, int a1_num, int a2_price, int a2_num) {
@@ -20,7 +20,7 @@ public class Train_K extends Train {
         super(train_id);
     }
 
-    public int getA1_price() {
+    public double getA1_price() {
         return A1_price;
     }
 
@@ -36,7 +36,7 @@ public class Train_K extends Train {
         A1_num = a1_num;
     }
 
-    public int getA2_price() {
+    public double getA2_price() {
         return A2_price;
     }
 
@@ -52,7 +52,7 @@ public class Train_K extends Train {
         A2_num = a2_num;
     }
 
-    public int get_price(String s) {
+    public double get_price(String s) {
         if (Objects.equals(s, "A1")) {
             return this.getA1_price();
         } else if (Objects.equals(s, "A2")) {

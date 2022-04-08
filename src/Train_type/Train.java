@@ -28,7 +28,7 @@ public class Train {
         System.out.println("Ohh!! you failed");
         return -8;
     }
-    public int get_price(String s){
+    public double get_price(String s){
         System.out.println("Ohh!! you failed");
         return -8;
     }

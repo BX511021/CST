@@ -3,12 +3,12 @@ package Train_type;
 import java.util.Objects;
 
 public class Train_G extends Train {
-    private int HC_price;
+    private double HC_price;
     private int HC_num;
-    private int SB_price;
+    private double SB_price;
     private int SB_num;
     private int SC_num;
-    private int SC_price;
+    private double SC_price;
 
     public Train_G(String train_id, int CC_price, int CC_num, int SB_price, int SB_num, int SC_num, int SC_price) {
         super(train_id);
@@ -24,7 +24,7 @@ public class Train_G extends Train {
         super(train_id);
     }
 
-    public int getCC_price() {
+    public double getCC_price() {
         return HC_price;
     }
 
@@ -40,7 +40,7 @@ public class Train_G extends Train {
         this.HC_num = CC_num;
     }
 
-    public int getSB_price() {
+    public double getSB_price() {
         return SB_price;
     }
 
@@ -64,7 +64,7 @@ public class Train_G extends Train {
         this.SC_num = SC_num;
     }
 
-    public int getSC_price() {
+    public double getSC_price() {
         return SC_price;
     }
 
@@ -72,7 +72,7 @@ public class Train_G extends Train {
         this.SC_price = SC_price;
     }
 
-    public int getHC_price() {
+    public double getHC_price() {
         return HC_price;
     }
 
@@ -88,7 +88,7 @@ public class Train_G extends Train {
         this.HC_num = HC_num;
     }
 
-    public int get_price(String s) {
+    public double get_price(String s) {
         if (Objects.equals(s, "HC")) {
             return this.getHC_price();
         } else if (Objects.equals(s, "SB")) {

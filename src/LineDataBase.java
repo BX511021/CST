@@ -55,10 +55,13 @@ class LineDataBase {
                 }
                 for (int i=3;i<args_line.length;i=i+2){
                    miles=Integer.parseInt(args_line[i+1]);
+
                 }
 
                 for (int i=3;i<args_line.length;i=i+2){
-                    lin1.add_station(args_line[i],Integer.parseInt(args_line[i+1]),false);
+                    if(!lin1.add_station(args_line[i],Integer.parseInt(args_line[i+1]),false)){
+                        return;
+                    }
                 }
                 lin1.setLine_id(id);
                 lin1.setContent(content);
