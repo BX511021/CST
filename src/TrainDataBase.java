@@ -22,6 +22,53 @@ public class TrainDataBase {
         return false;
     }
 
+    public boolean check_legal(String [] args_line,Train train,LineDataBase lineDataBase){
+        if (!legal_train(train.Train_id)){
+            System.out.println("Train serial illegal");
+            return false;
+        }
+
+
+        if (isExist(train.Train_id))
+        {
+            System.out.println("Train serial duplicate");
+            return false;
+        }
+
+        Line line=lineDataBase.line_isExist(args_line[2]);
+        if (line!=null&& Objects.requireNonNull(line).train_num<line.content){
+            ;
+        }
+        else {
+            System.out.println("Line illegal");
+            return false;
+        }
+
+        int i;
+        double j;
+        for (i=3;i<args_line.length;i++){
+            if(i%2==1)
+            {
+                j=Double.parseDouble(args_line[i]);
+                if (j<0)
+                {
+                    System.out.println("Price illegal");
+                    return false;
+                }
+            }
+            else
+            {
+                j=Integer.parseInt(args_line[i]);
+                if (j<0){
+                    System.out.println("Ticket num illegal");
+                    return false;
+                }
+
+            }
+        }
+        return true;
+    }
+
     public boolean legal_train(String train_id){
 
         if(train_id.charAt(0)!='K'&&train_id.charAt(0)!='G'&&train_id.charAt(0)!='0'){
@@ -42,77 +89,47 @@ public class TrainDataBase {
 
     public void   add_train(String [] args_line,LineDataBase lineDataBase){
 
-        try {
-            //车号符合规范
+       try {
+
             Train train = new Train(args_line[1]);
-            if (!legal_train(train.Train_id)){
-                System.out.println("Train_type.Train serial illegal");
-                return;
-            }
-
-            //车号是否存在
-            if (isExist(train.Train_id))
-            {
-                System.out.println("Train_type.Train serial duplicate");
-                return ;
-            }
-            //检查负载，并且加一
-            Line line=lineDataBase.line_isExist(args_line[2]);
-            if (line!=null&& Objects.requireNonNull(line).train_num<line.content){
-                ;
-            }
-            else {
-                System.out.println("Line illegal");
-                return ;
-            }
-            //检查票价和张数
-            int i,j;
-            for (i=3;i<args_line.length;i++){
-                j=Integer.parseInt(args_line[i]);
-                if(j<=0)
-                {
-                    if(i%2==1){
-                        System.out.println("Price illegal");
-                    }
-                    else {
-                        System.out.println("Ticket num illegal");
-                    }
-                    return ;
-
-                }
-            }
-
-            //开始操作
             if(train.Train_id.charAt(0)=='K'){
+
 
                 if(args_line.length!=7)
                 {
-                    System.out.println("Train_type.Train serial illegal");
+                    System.out.println("Arguments illegal");
                     return ;
+                }
+                if (!check_legal(args_line,train,lineDataBase)){
+                    return;
                 }
 
                 Train_K train1=new Train_K(train.Train_id);
 
                 train1.setT_line_id(args_line[2]);
 
-                train1.setA1_price(Integer.parseInt(args_line[3]));
+                train1.setA1_price(Double.parseDouble(args_line[3]));
                 train1.setA1_num(Integer.parseInt(args_line[4]));
 
-                train1.setA2_price(Integer.parseInt(args_line[5]));
+                train1.setA2_price(Double.parseDouble(args_line[5]));
                 train1.setA2_num(Integer.parseInt(args_line[6]));
 
                 Train_list.add(train1);
                 lineDataBase.line_isExist(args_line[2]).train_num++;
-                System.out.println("Train_type.Train Success");
+                System.out.println("Add Train Success");
 
 
             }
             else if(train.Train_id.charAt(0)=='0'){
 
+
                 if(args_line.length!=9)
                 {
-                    System.out.println("Train_type.Train serial illegal");
+                    System.out.println("Arguments illegal");
                     return ;
+                }
+                if (!check_legal(args_line,train,lineDataBase)){
+                    return;
                 }
 
 
@@ -121,51 +138,57 @@ public class TrainDataBase {
 
                 train1.setT_line_id(args_line[2]);
 
-                train1.setCC_price(Integer.parseInt(args_line[3]));
+                train1.setCC_price(Double.parseDouble(args_line[3]));
                 train1.setCC_num(Integer.parseInt(args_line[4]));
 
-                train1.setSB_price(Integer.parseInt(args_line[5]));
-                train1.setCC_num(Integer.parseInt(args_line[6]));
+                train1.setSB_price(Double.parseDouble(args_line[5]));
+                train1.setSB_num(Integer.parseInt(args_line[6]));
 
-                train1.setGG_price(Integer.parseInt(args_line[7]));
+                train1.setGG_price(Double.parseDouble(args_line[7]));
                 train1.setGG_num(Integer.parseInt(args_line[8]));
 
                 Train_list.add(train1);
                 lineDataBase.line_isExist(args_line[2]).train_num++;
-                System.out.println("Train_type.Train Success");
+                System.out.println("Add Train Success");
+
             }else if (train.Train_id.charAt(0)=='G'){
+
 
                 if(args_line.length!=9)
                 {
-                    System.out.println("Train_type.Train serial illegal");
+                    System.out.println("Arguments illegal");
                     return ;
+                }
+
+                if (!check_legal(args_line,train,lineDataBase)){
+                    return;
                 }
 
                 Train_G train1 =new Train_G(train.Train_id);
 
                 train1.setT_line_id(args_line[2]);
 
-                train1.setSC_price(Integer.parseInt(args_line[3]));
+                train1.setSC_price(Double.parseDouble(args_line[3]));
                 train1.setSC_num(Integer.parseInt(args_line[4]));
 
-                train1.setCC_price(Integer.parseInt(args_line[5]));
-                train1.setCC_num(Integer.parseInt(args_line[6]));
+                train1.setHC_price(Double.parseDouble(args_line[5]));
+                train1.setHC_num(Integer.parseInt(args_line[6]));
 
-                train1.setSB_price(Integer.parseInt(args_line[7]));
+                train1.setSB_price(Double.parseDouble(args_line[7]));
                 train1.setSB_num(Integer.parseInt(args_line[8]));
 
                 Train_list.add(train1);
                 lineDataBase.line_isExist(args_line[2]).train_num++;
-                System.out.println("Train_type.Train Success");
+                System.out.println("Add Train Success");
 
             }
             else {
-                System.out.println("Train_type.Train serial illegal");
+                System.out.println("Train serial illegal");
 
             }
         }catch (NumberFormatException e){
-            System.out.println("Number illegal");
-        }
+           System.out.println("Number illegal");
+       }
     }
 
     public void del_train(String [] args_line, LineDataBase lineDataBase){
@@ -179,7 +202,7 @@ public class TrainDataBase {
 //        }
         if (isExist((args_line[1]))){
 
-            System.out.println("Train does exist");
+//           System.out.println("Train does exist");
             Iterator<Train> it = this.Train_list.iterator();
             while(it.hasNext())
             {
@@ -187,10 +210,14 @@ public class TrainDataBase {
                 if(Objects.equals(args_line[1], temp_train.Train_id)) {
                     it.remove();
                     lineDataBase.line_isExist(temp_train.T_line_id).train_num--;
-                    System.out.println("Del Train_type.Train Success");
+                    System.out.println("Del Train Success");
                     return;
                 }
             }
+        }
+        else {
+            System.out.println("Train does not exist");
+            return;
         }
     }
 
@@ -202,29 +229,71 @@ public class TrainDataBase {
         Collections.sort(this.Train_list, new Comparator<Train>() {
             @Override
             public int compare(Train o1, Train o2) {
-                return o2.Train_id.compareTo(o1.Train_id);
+                return o1.Train_id.compareTo(o2.Train_id);
             }
         });
 
         if(args_line.length==1){
             int num=1;
             for (Train temp_train : this.Train_list) {
-                System.out.print("[" + num + "] " + temp_train.Train_id + ":" + temp_train.T_line_id + " ");
-                temp_train.toString();
-                num++;
+                if (temp_train.Train_id.charAt(0)=='K')
+                {
+                    System.out.print("[" + num + "] " + temp_train.Train_id + ": " + temp_train.T_line_id + " ");
+                    temp_train.toString();
+                    num++;
+                }
+
+            }
+            for (Train temp_train : this.Train_list) {
+                if (temp_train.Train_id.charAt(0)=='G'){
+                    System.out.print("[" + num + "] " + temp_train.Train_id + ": " + temp_train.T_line_id + " ");
+                    temp_train.toString();
+                    num++;
+                }
+
+            }
+            for (Train temp_train : this.Train_list) {
+                if (temp_train.Train_id.charAt(0)=='0')
+                {
+                    System.out.print("[" + num + "] " + temp_train.Train_id + ": " + temp_train.T_line_id + " ");
+                    temp_train.toString();
+                    num++;
+                }
             }
         }
+
         else if (args_line.length==2){
             if(lineDataBase.line_isExist(args_line[1])==null)
             {
                 System.out.println("Line does not exist");
                 return;
-            }else
+            }
+            else if (lineDataBase.line_isExist(args_line[1]).train_num==0){
+                System.out.println("No Trains");
+                return;
+            }
+            else
             {
                 int num=1;
                 for (Train temp_train : this.Train_list) {
-                    if (Objects.equals(temp_train.T_line_id, args_line[1])){
-                        System.out.print("[" + num + "] " + temp_train.Train_id + ":" + temp_train.T_line_id + " ");
+                    if (Objects.equals(temp_train.T_line_id, args_line[1])&&temp_train.Train_id.charAt(0)=='K'){
+                        System.out.print("[" + num + "] " + temp_train.Train_id + ": " + temp_train.T_line_id + " ");
+                        temp_train.toString();
+                        num++;
+                    }
+
+                }
+                for (Train temp_train : this.Train_list) {
+                    if (Objects.equals(temp_train.T_line_id, args_line[1])&&temp_train.Train_id.charAt(0)=='G'){
+                        System.out.print("[" + num + "] " + temp_train.Train_id + ": " + temp_train.T_line_id + " ");
+                        temp_train.toString();
+                        num++;
+                    }
+
+                }
+                for (Train temp_train : this.Train_list) {
+                    if (Objects.equals(temp_train.T_line_id, args_line[1])&&temp_train.Train_id.charAt(0)=='0'){
+                        System.out.print("[" + num + "] " + temp_train.Train_id + ": " + temp_train.T_line_id + " ");
                         temp_train.toString();
                         num++;
                     }
@@ -232,7 +301,8 @@ public class TrainDataBase {
                 }
             }
 
-        }else {
+        }
+        else {
             System.out.println("Arguments illegal");
         }
 
@@ -251,7 +321,7 @@ public class TrainDataBase {
 //                        return;
 //                }
                 if(!this.isExist(args_line[1])){
-                        System.out.println("Train_type.Train serial does not exist");
+                        System.out.println("Train serial does not exist");
                         return;
                 }
 
@@ -261,7 +331,14 @@ public class TrainDataBase {
                 {
                         Train temp_train=it.next();
                         Line temp_line=lineDataBase.line_isExist(temp_train.T_line_id);
+
                         if(temp_train.Train_id.equals(args_line[1])){
+
+                            if (temp_line.Line_map.get(args_line[2])==null||temp_line.Line_map.get(args_line[3])==null){
+                                System.out.println("Station does not exist");
+                                return;
+                            }
+
                                 if (temp_train.get_num(args_line[4])!=-8&&temp_train.get_price(args_line[4])!=-8)
 
                                 {       String Price;

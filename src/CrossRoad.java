@@ -43,8 +43,11 @@ public class CrossRoad {
 
             }
 
-        else {
+        else if (argsline[0].equals("addUser")){
             userDatabase.addUser(argsline);
+        }
+        else {
+            System.out.println("Command does not exist");
         }
 
 

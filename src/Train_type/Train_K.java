@@ -1,6 +1,7 @@
 package Train_type;
 
 import java.util.Objects;
+import java.text.DecimalFormat;
 
 public class Train_K extends Train {
     private double A1_price;
@@ -24,7 +25,7 @@ public class Train_K extends Train {
         return A1_price;
     }
 
-    public void setA1_price(int a1_price) {
+    public void setA1_price(double a1_price) {
         A1_price = a1_price;
     }
 
@@ -40,7 +41,7 @@ public class Train_K extends Train {
         return A2_price;
     }
 
-    public void setA2_price(int a2_price) {
+    public void setA2_price(double a2_price) {
         A2_price = a2_price;
     }
 
@@ -53,9 +54,9 @@ public class Train_K extends Train {
     }
 
     public double get_price(String s) {
-        if (Objects.equals(s, "A1")) {
+        if (Objects.equals(s, "1A")) {
             return this.getA1_price();
-        } else if (Objects.equals(s, "A2")) {
+        } else if (Objects.equals(s, "2A")) {
             return this.getA2_price();
         }
          else {
@@ -64,9 +65,9 @@ public class Train_K extends Train {
 
     }
     public int get_num(String s) {
-        if (Objects.equals(s, "A1")) {
+        if (Objects.equals(s, "1A")) {
             return this.getA1_num();
-        } else if (Objects.equals(s, "A2")) {
+        } else if (Objects.equals(s, "2A")) {
             return this.getA2_num();
         }
         else {
@@ -77,8 +78,11 @@ public class Train_K extends Train {
 
     @Override
     public String toString() {
-        System.out.print("[A1]"+this.A1_price+":"+this.A1_num+" ");
-        System.out.print("[A2]"+this.A2_price+":"+this.A2_num+" ");
+        String Price;
+        Price= new DecimalFormat(".00").format(this.A1_price);
+        System.out.print("[1A]"+Price+":"+this.A1_num+" ");
+        Price= new DecimalFormat(".00").format(this.A2_price);
+        System.out.print("[2A]"+Price+":"+this.A2_num+" ");
 
         System.out.println("");
         return null;

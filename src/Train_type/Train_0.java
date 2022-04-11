@@ -1,5 +1,6 @@
 package Train_type;
 
+import java.text.DecimalFormat;
 import java.util.Objects;
 
 public class Train_0 extends Train{
@@ -34,7 +35,7 @@ public class Train_0 extends Train{
         return CC_price;
     }
 
-    public void setCC_price(int CC_price) {
+    public void setCC_price(double CC_price) {
         this.CC_price = CC_price;
     }
 
@@ -50,7 +51,7 @@ public class Train_0 extends Train{
         return SB_price;
     }
 
-    public void setSB_price(int SB_price) {
+    public void setSB_price(double SB_price) {
         this.SB_price = SB_price;
     }
 
@@ -66,7 +67,7 @@ public class Train_0 extends Train{
         return GG_price;
     }
 
-    public void setGG_price(int GG_price) {
+    public void setGG_price(double GG_price) {
         this.GG_price = GG_price;
     }
 
@@ -105,9 +106,13 @@ public class Train_0 extends Train{
 
     @Override
     public String toString() {
-        System.out.print("[CC]"+this.CC_price+":"+this.CC_num+" ");
-        System.out.print("[SB]"+this.SB_price+":"+this.SB_num+" ");
-        System.out.print("[GG]"+this.GG_price+":"+this.GG_num+" ");
+        String Price;
+        Price= new DecimalFormat(".00").format(this.CC_price);
+        System.out.print("[CC]"+Price+":"+this.CC_num+" ");
+        Price= new DecimalFormat(".00").format(this.SB_price);
+        System.out.print("[SB]"+Price+":"+this.SB_num+" ");
+        Price= new DecimalFormat(".00").format(this.GG_price);
+        System.out.print("[GG]"+Price+":"+this.GG_num+" ");
         System.out.println("");
         return null;
     }

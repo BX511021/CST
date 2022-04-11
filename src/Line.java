@@ -7,7 +7,7 @@ public class Line {
         private String  Line_id;
         public int content;
         public int train_num=0;
-        //使用Map的方式来存储站点相关信息
+
         public Map<String ,Integer> Line_map = new HashMap<>();
 
 
@@ -69,7 +69,7 @@ public class Line {
 
         public void delete_station (String Station_name){
                 if(this.Line_map.get(Station_name)==null){
-                        System.out.println("Station duplicate");
+                        System.out.println("Station does not exist");
                         return;
                 }
                 this.Line_map.remove(Station_name);
@@ -84,7 +84,7 @@ public class Line {
                 System.out.print(""+this.train_num+"/"+this.content+" ");
 //                List<Map.Entry<String,String>> list = new ArrayList<Map.Entry<String,String>>(map.entrySet());
 //                Collections.sort(list,new Comparator<Map.Entry<String,String>>() {
-//                        //升序排序
+//                        //锟斤拷锟斤拷锟斤拷锟斤拷
 //                        public int compare(Entry<String, String> o1,
 //                                           Entry<String, String> o2) {
 //                                return o1.getValue().compareTo(o2.getValue());

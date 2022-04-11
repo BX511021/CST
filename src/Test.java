@@ -15,41 +15,37 @@ public class Test {
         while (scan.hasNextLine()) {
             argStr = scan.nextLine();
             String[] argline = argStr.split(" ");
-            //推出模式
+
             if (argStr.equals("QUIT")) {
                 System.out.println("----- Good Bye! -----");
                 System.exit(0);
             }
-            //进入列车管理员模式
+
             else if (argStr.equals("TunakTunakTun"))
             {
                 if (Brahman_mode)
                 {
-                    System.out.println("WaNiBa");
+                    System.out.println("WanNiBa");
                 }else {
-                    System.out.println("Come!!On!!!");
-                    System.out.println("Super Brahman ");
-                    System.out.println("Go!!");
+//                    System.out.println("Come!!On!!!");
+//                    System.out.println("Super Brahman ");
+//                    System.out.println("Go!!");
                     System.out.println("DuluDulu");
                     Brahman_mode=true;
                 }
 
             }
-            //推出管理员模式
-            else if(argStr.equals("NutKanutKanut")){
-                if (!Brahman_mode)
-                {
-                    System.out.println("WaNiBa");
-                }else {
-                    System.out.println("Nice Try");
+
+            else if(argStr.equals("NutKanutKanut")) {
+                if (!Brahman_mode) {
+                    System.out.println("WanNiBa");
+                } else {
+//                    System.out.println("Nice Try");
                     System.out.println("DaDaDa");
-                    Brahman_mode=false;
+                    Brahman_mode = false;
                 }
-
             }
-            //错误判定
 
-            //用户操作
             else {
                 CrossRoad.Cross_Z(argline,lineDataBase,trainDataBase,Brahman_mode,userDatabase);
             }

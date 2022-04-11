@@ -2,13 +2,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
     class UserDatabase {
-        //Ê¹ÓÃÁĞ±íÀ´½øĞĞ¹ÜÀíºÍ¼ì²é
+
         private ArrayList<User> userArray;
         public UserDatabase(){
 
             this.userArray = new ArrayList<>();
         }
-        //¼ì²éÊÇ·ñÎª¿Õ
+
         public boolean isEmpty()
         {
 
@@ -24,7 +24,7 @@ import java.util.Iterator;
             String name = args[1];
             char gender = args[2].toCharArray()[0];
             String aadharrId = args[3];
-            //¼ì²éĞÕÃû¸ñÊ½
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½
             char[] names = name.toCharArray();
             for(int i=0;i<name.length();i++)
             {
@@ -36,13 +36,13 @@ import java.util.Iterator;
                     return false;
                 }
             }
-            //¼ì²éĞÔ±ğ¸ñÊ½
+            //ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½Ê½
             if(gender!='F'&&gender!='M'&&gender!='O')
             {
                 System.out.println("Sex illegal");
                 return false;
             }
-            //¼ì²éID¸ñÊ½
+            //ï¿½ï¿½ï¿½IDï¿½ï¿½Ê½
             int region = Integer.parseInt(aadharrId.substring(0,4));
             int category = Integer.parseInt(aadharrId.substring(4,8));
             int biology = Integer.parseInt(aadharrId.substring(8,11));

@@ -1,5 +1,6 @@
 package Train_type;
 
+import java.text.DecimalFormat;
 import java.util.Objects;
 
 public class Train_G extends Train {
@@ -24,27 +25,27 @@ public class Train_G extends Train {
         super(train_id);
     }
 
-    public double getCC_price() {
+    public double getHC_price() {
         return HC_price;
     }
 
-    public void setCC_price(int CC_price) {
-        this.HC_price = CC_price;
+    public void setHC_price(double HC_price) {
+        this.HC_price = HC_price;
     }
 
-    public int getCC_num() {
+    public int getHC_num() {
         return HC_num;
     }
 
-    public void setCC_num(int CC_num) {
-        this.HC_num = CC_num;
+    public void setHC_num(int HC_num) {
+        this.HC_num = HC_num;
     }
 
     public double getSB_price() {
         return SB_price;
     }
 
-    public void setSB_price(int SB_price) {
+    public void setSB_price(double SB_price) {
         this.SB_price = SB_price;
     }
 
@@ -68,24 +69,8 @@ public class Train_G extends Train {
         return SC_price;
     }
 
-    public void setSC_price(int SC_price) {
+    public void setSC_price(double SC_price) {
         this.SC_price = SC_price;
-    }
-
-    public double getHC_price() {
-        return HC_price;
-    }
-
-    public void setHC_price(int HC_price) {
-        this.HC_price = HC_price;
-    }
-
-    public int getHC_num() {
-        return HC_num;
-    }
-
-    public void setHC_num(int HC_num) {
-        this.HC_num = HC_num;
     }
 
     public double get_price(String s) {
@@ -115,9 +100,13 @@ public class Train_G extends Train {
 
     @Override
     public String toString() {
-        System.out.print("[SC]" + this.SC_price + ":" + this.SC_num + " ");
-        System.out.print("[HC]" + this.HC_price + ":" + this.HC_num + " ");
-        System.out.print("[SB]" + this.SB_price + ":" + this.SB_num + " ");
+        String Price;
+        Price= new DecimalFormat(".00").format(this.SC_price);
+        System.out.print("[SC]" +Price + ":" + this.SC_num + " ");
+        Price= new DecimalFormat(".00").format(this.HC_price);
+        System.out.print("[HC]" + Price+ ":" + this.HC_num + " ");
+        Price= new DecimalFormat(".00").format(this.SB_price);
+        System.out.print("[SB]" + Price + ":" + this.SB_num + " ");
         System.out.println("");
         return null;
     }

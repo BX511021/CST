@@ -31,9 +31,9 @@ class LineDataBase {
 
     public void add_Line(String[] args_line){
         double d =args_line.length;
-        if(d%2.0!=1.0)
+        if(d%2.0!=1.0||d<=3)
         {
-            System.out.println("Arguments illegal Ohh!");
+            System.out.println("Arguments illegal");
             return;
         }
 
@@ -49,13 +49,9 @@ class LineDataBase {
                 int miles;
 
 
-                if (content<=0){
-                    System.out.println("Capacity illegal");
-                    return;
-                }
+
                 for (int i=3;i<args_line.length;i=i+2){
                    miles=Integer.parseInt(args_line[i+1]);
-
                 }
 
                 for (int i=3;i<args_line.length;i=i+2){
@@ -64,6 +60,11 @@ class LineDataBase {
                     }
                 }
                 lin1.setLine_id(id);
+
+                if (content<=0){
+                    System.out.println("Capacity illegal");
+                    return;
+                }
                 lin1.setContent(content);
 
             }catch (NumberFormatException e){
@@ -92,10 +93,12 @@ class LineDataBase {
             while(it.hasNext())
             {
                 Line temp_line = it.next();
-                if(Objects.equals(args_Line[1], temp_line.getLine_id()))
+                if(Objects.equals(args_Line[1], temp_line.getLine_id())){
                     it.remove();
-                System.out.println("Del Line success");
-                return;
+                    System.out.println("Del Line success");
+                    return;
+                }
+
             }
         }catch (NumberFormatException e){
             System.out.println("Arguments illegal");
