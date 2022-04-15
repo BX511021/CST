@@ -21,8 +21,7 @@ public class Test {
                 System.exit(0);
             }
 
-            else if (argStr.equals("TunakTunakTun"))
-            {
+            else if (argStr.equals("TunakTunakTun")) {
                 if (Brahman_mode)
                 {
                     System.out.println("WanNiBa");

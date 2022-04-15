@@ -46,6 +46,12 @@ public class CrossRoad {
         else if (argsline[0].equals("addUser")){
             userDatabase.addUser(argsline);
         }
+        else if (argsline[0].equals("login")){
+            userDatabase.login(argsline);
+        }
+        else if (argsline[0].equals("logout")){
+            userDatabase.logout(argsline);
+        }
         else {
             System.out.println("Command does not exist");
         }
