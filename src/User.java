@@ -1,10 +1,14 @@
+import java.util.ArrayList;
+
 class User {
     private String name;
     private char gender;
     private String aadharrId;
+    public ArrayList<String> My_Trains;
 
     public void setName(String name) {
         this.name = name;
+        this.My_Trains=new ArrayList<>();
     }
 
     public void setGender(char gender) {

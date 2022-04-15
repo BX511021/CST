@@ -52,6 +52,11 @@ public class CrossRoad {
         else if (argsline[0].equals("logout")){
             userDatabase.logout(argsline);
         }
+        else if (argsline[0].equals("buyTicket")){
+            userDatabase.buyTicket(argsline,trainDataBase,lineDataBase);
+        }
+        else if (argsline[0].equals("listOrder"))
+            userDatabase.listOrder(argsline);
         else {
             System.out.println("Command does not exist");
         }

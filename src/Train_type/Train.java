@@ -24,6 +24,14 @@ public class Train {
         T_line_id = t_line_id;
     }
 
+    public String minus_num(String ticket_type,int num){
+        return null;
+
+    }
+    public boolean check_num(String ticket_type,int num){
+        return false;
+    }
+
     public int get_num(String s){
         System.out.println("Ohh!! you failed");
         return -8;

@@ -1,4 +1,7 @@
+import Train_type.Train;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Objects;
 
@@ -16,6 +19,20 @@ class UserDatabase {
 
             return this.userArray.isEmpty();
         }
+
+    public void upgrade(User user1){
+        Iterator<User> it = this.userArray.iterator();
+        int num=0;
+        while(it.hasNext())
+        {
+            User temp_user = it.next();
+            if(Objects.equals(user1.getID(), temp_user.getID())){
+                userArray.set(num,user1);
+                return;
+            }
+            num++;
+        }
+    }
         public boolean addUser(String[] args) {
             if(args.length<4)
             {
@@ -132,6 +149,64 @@ class UserDatabase {
             System.out.println("Logout success");
 
             this.SuperUser=null;
+        }
+
+        public void buyTicket (String [] args_line,TrainDataBase trainDataBase,LineDataBase lineDataBase){
+            if (args_line.length!=6){
+                System.out.println("Arguments illegal");
+                return;
+            }
+            if (this.SuperUser==null){
+                System.out.println("Please login first");
+            }
+
+            Train temp_train=trainDataBase.Train_isExist(args_line[1]);
+            if (temp_train==null){
+                System.out.println("Train does not exist");
+            }
+
+
+            Line temp_line = lineDataBase.line_isExist(temp_train.T_line_id);
+
+            if (temp_line.Line_map.get(args_line[2])==null||temp_line.Line_map.get(args_line[3])==null){
+                System.out.println("Station does not exist");
+                return;
+            }
+
+            int ticket_num = Integer.parseInt(args_line[5]);
+            if (!temp_train.check_num(args_line[4],ticket_num)){
+                return;
+            }
+
+            String price=temp_train.minus_num(args_line[4],ticket_num);
+            this.SuperUser.My_Trains.add("["+args_line[1]+": "+args_line[2]+"->"+args_line[3]+"] "+"seat:"+args_line[4]+" "+"num:"+args_line[5]+" price:"+price);
+            upgrade(this.SuperUser);
+            System.out.println("Thanks for your order");
+
+        }
+
+        public void listOrder(String[] args_line){
+            if (args_line.length!=1){
+                System.out.println("Arguments illegal");
+                return;
+            }
+
+            if (this.SuperUser==null){
+                System.out.println("Please login first");
+                return;
+            }
+
+            if (this.SuperUser.My_Trains.isEmpty()){
+                System.out.println("No order");
+                return;
+            }
+            ArrayList<String> temp_list=this.SuperUser.My_Trains;
+            Collections.reverse(temp_list);
+            Iterator<String> it=temp_list.iterator();
+            while (it.hasNext()){
+                String a1=it.next();
+                System.out.println(a1);
+            }
         }
     }
 

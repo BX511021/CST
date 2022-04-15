@@ -104,6 +104,59 @@ public class Train_0 extends Train{
 
     }
 
+    public String  minus_num(String ticket_type,int num){
+            if (Objects.equals(ticket_type, "CC")){
+                this.CC_num-=num;
+                return new DecimalFormat(".00").format(num*this.CC_price);
+            }else if (Objects.equals(ticket_type, "SB")){
+                this.SB_num-=num;
+                return new DecimalFormat(".00").format(num*this.SB_price);
+            }else if (Objects.equals(ticket_type, "GG")){
+                this.GG_num-=num;
+                return new DecimalFormat(".00").format(num*this.GG_price);
+            }else {
+                System.out.println("Seat does not match");
+            }
+            return null;
+    }
+
+    public boolean check_num(String ticket_type,int num){
+        if (Objects.equals(ticket_type, "CC")){
+
+        }else if (Objects.equals(ticket_type, "SB")){
+
+        }else if (Objects.equals(ticket_type, "GG")){
+
+        }else {
+            System.out.println("Seat does not match");
+            return false;
+        }
+
+        if (num<0){
+            System.out.println("Ticket number illegal");
+            return false;
+        }
+
+        if (Objects.equals(ticket_type, "CC")){
+            if (this.CC_num<num){
+                System.out.println("Ticket does not enough");
+                return false;
+            }
+        }else if (Objects.equals(ticket_type, "SB")){
+            if (this.SB_num<num){
+                System.out.println("Ticket does not enough");
+                return false;
+            }
+        }
+        else if (Objects.equals(ticket_type, "GG")){
+            if (this.GG_num<num){
+                System.out.println("Ticket does not enough");
+                return false;
+            }
+        }
+        return true;
+    }
+
     @Override
     public String toString() {
         String Price;

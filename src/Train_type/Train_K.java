@@ -75,6 +75,45 @@ public class Train_K extends Train {
         }
 
     }
+    public String minus_num(String ticket_type,int num){
+        if (Objects.equals(ticket_type, "1A")){
+            this.A1_num-=num;
+            return new DecimalFormat(".00").format(num*this.A1_price);
+        }else if (Objects.equals(ticket_type, "2A")){
+            this.A2_num-=num;
+            return new DecimalFormat(".00").format(num*this.A2_price);
+        }else {
+            System.out.println("Seat does not match");
+        }
+        return null;
+    }
+
+    public boolean check_num(String ticket_type,int num){
+        if (Objects.equals(ticket_type, "1A")){
+        }else if (Objects.equals(ticket_type, "2A")){
+        }else {
+            System.out.println("Seat does not match");
+            return false;
+        }
+        if (num<0){
+            System.out.println("Ticket number illegal");
+            return false;
+        }
+
+        if (Objects.equals(ticket_type, "1A")){
+            if (this.A1_num<num){
+                System.out.println("Ticket does not enough");
+                return false;
+            }
+        }else if (Objects.equals(ticket_type, "2A")){
+            if (this.A2_num<num){
+                System.out.println("Ticket does not enough");
+                return false;
+            }
+        }
+
+        return true;
+    }
 
     @Override
     public String toString() {

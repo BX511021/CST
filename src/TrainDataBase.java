@@ -22,6 +22,29 @@ public class TrainDataBase {
         return false;
     }
 
+    public void upgrade(Train train1){
+        Iterator<Train> it = this.Train_list.iterator();
+        int num=0;
+        while(it.hasNext())
+        {
+            Train temp_train = it.next();
+            if(Objects.equals(train1.Train_id, temp_train.Train_id)){
+                Train_list.set(num,train1);
+                return;
+            }
+            num++;
+        }
+    }
+
+    public Train Train_isExist(String  train_id)
+    {
+        for (Train temp_train : this.Train_list) {
+            if (Objects.equals(train_id, temp_train.Train_id))
+                return temp_train;
+        }
+        return null;
+    }
+
     public boolean check_legal(String [] args_line,Train train,LineDataBase lineDataBase){
         if (!legal_train(train.Train_id)){
             System.out.println("Train serial illegal");
