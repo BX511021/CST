@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Objects;
+import java.text.DecimalFormat;
 
 class UserDatabase {
 
@@ -178,8 +179,11 @@ class UserDatabase {
                 return;
             }
 
-            String price=temp_train.minus_num(args_line[4],ticket_num);
-            this.SuperUser.My_Trains.add("["+args_line[1]+": "+args_line[2]+"->"+args_line[3]+"] "+"seat:"+args_line[4]+" "+"num:"+args_line[5]+" price:"+price);
+            temp_train.minus_num(args_line[4],ticket_num);
+
+            Double price = ticket_num*(trainDataBase.ticket_price(args_line[2],args_line[3],temp_train,args_line[4],lineDataBase));
+            String price_neo=new DecimalFormat(".00").format(price);
+            this.SuperUser.My_Trains.add("["+args_line[1]+": "+args_line[2]+"->"+args_line[3]+"] "+"seat:"+args_line[4]+" "+"num:"+args_line[5]+" price:"+price_neo);
             upgrade(this.SuperUser);
             System.out.println("Thanks for your order");
 

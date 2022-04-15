@@ -332,6 +332,11 @@ public class TrainDataBase {
 
     }
 
+    public double ticket_price(String start,String end,Train train,String type,LineDataBase lineDataBase){
+        Line temp_line=lineDataBase.line_isExist(train.T_line_id);
+        return train.get_price(type)*Math.abs((temp_line.Line_map.get(start)-temp_line.Line_map.get(end)));
+    }
+
     public void check_it(String [] args_line,LineDataBase lineDataBase){
         if(this.isEmpty()){
                         System.out.println("No Trains");
