@@ -35,7 +35,7 @@ class UserDatabase {
         }
     }
         public boolean addUser(String[] args) {
-            if(args.length<4)
+            if(args.length<4||args[3].length()!=12)
             {
                 System.out.println("Arguments illegal");
                 return false;
@@ -43,7 +43,7 @@ class UserDatabase {
             String name = args[1];
             char gender = args[2].toCharArray()[0];
             String aadharrId = args[3];
-            //���������ʽ
+
             char[] names = name.toCharArray();
             for(int i=0;i<name.length();i++)
             {
@@ -55,13 +55,13 @@ class UserDatabase {
                     return false;
                 }
             }
-            //����Ա��ʽ
+
             if(gender!='F'&&gender!='M'&&gender!='O')
             {
                 System.out.println("Sex illegal");
                 return false;
             }
-            //���ID��ʽ
+
             int region = Integer.parseInt(aadharrId.substring(0,4));
             int category = Integer.parseInt(aadharrId.substring(4,8));
             int biology = Integer.parseInt(aadharrId.substring(8,11));
@@ -88,8 +88,7 @@ class UserDatabase {
             return true;
         }
 
-        public boolean isExist(String aadharrId)
-        {
+        public boolean isExist(String aadharrId) {
             Iterator<User> it = this.userArray.iterator();
             while(it.hasNext())
             {
@@ -99,13 +98,11 @@ class UserDatabase {
             }
             return false;
         }
-        public User User_isExist(String aadharrId)
-        {
-            Iterator<User> it = this.userArray.iterator();
-            while(it.hasNext())
-            {
-                User tempUser = it.next();
-                if(aadharrId.equals(tempUser.getID()))
+
+
+        public User User_isExist(String aadharrId) {
+            for (User tempUser : this.userArray) {
+                if (aadharrId.equals(tempUser.getID()))
                     return tempUser;
             }
             return null;
@@ -114,6 +111,7 @@ class UserDatabase {
         public void login(String [] args_line){
             if (args_line.length!=3){
                 System.out.println("Arguments illegal");
+                return;
             }
 
             User tempUser;
@@ -126,7 +124,7 @@ class UserDatabase {
             tempUser=User_isExist(args_line[1]);
 
             if (tempUser==null){
-                System.out.println("User does not exist\n");
+                System.out.println("User does not exist");
                 return;
             }
 
@@ -159,11 +157,13 @@ class UserDatabase {
             }
             if (this.SuperUser==null){
                 System.out.println("Please login first");
+                return;
             }
 
             Train temp_train=trainDataBase.Train_isExist(args_line[1]);
             if (temp_train==null){
                 System.out.println("Train does not exist");
+                return;
             }
 
 
@@ -174,11 +174,12 @@ class UserDatabase {
                 return;
             }
 
-            int ticket_num = Integer.parseInt(args_line[5]);
-            if (!temp_train.check_num(args_line[4],ticket_num)){
+
+            if (!temp_train.check_num(args_line[4],args_line[5])){
                 return;
             }
 
+            int ticket_num = Integer.parseInt(args_line[5]);
             temp_train.minus_num(args_line[4],ticket_num);
 
             Double price = ticket_num*(trainDataBase.ticket_price(args_line[2],args_line[3],temp_train,args_line[4],lineDataBase));

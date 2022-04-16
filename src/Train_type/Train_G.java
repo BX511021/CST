@@ -113,7 +113,7 @@ public class Train_G extends Train {
         }
         return null;
     }
-    public boolean check_num(String ticket_type,int num){
+    public boolean check_num(String ticket_type,String num){
         if (Objects.equals(ticket_type, "HC")){
         }else if (Objects.equals(ticket_type, "SB")){
         }else if (Objects.equals(ticket_type, "SC")){
@@ -121,23 +121,29 @@ public class Train_G extends Train {
             System.out.println("Seat does not match");
             return false;
         }
-        if (num<0){
+        if (!isPureDigital(String.valueOf(num))){
             System.out.println("Ticket number illegal");
             return false;
         }
+        if (Integer.parseInt(num)==0){
+            System.out.println("Ticket number illegal");
+            return false;
+        }
+
+        int num1=Integer.parseInt(num);
         if (Objects.equals(ticket_type, "HC")){
-            if (this.HC_num<num){
+            if (this.HC_num<num1){
                 System.out.println("Ticket does not enough");
                 return false;
             }
         }else if (Objects.equals(ticket_type, "SB")){
-            if (this.SB_num<num){
+            if (this.SB_num<num1){
                 System.out.println("Ticket does not enough");
                 return false;
             }
         }
         else if (Objects.equals(ticket_type, "SC")){
-            if (this.SC_num<num){
+            if (this.SC_num<num1){
                 System.out.println("Ticket does not enough");
                 return false;
             }
