@@ -31,6 +31,10 @@ class User {
         return aadharrId;
     }
 
+    public String getAadharrId() {
+        return aadharrId;
+    }
+
     public String toString() {
         return new String("Name:" + this.name + "\nSex:" + this.gender + "\nAadhaar:" + this.aadharrId);
     }

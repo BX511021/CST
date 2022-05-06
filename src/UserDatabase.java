@@ -78,6 +78,18 @@ class UserDatabase {
                 System.out.println("Aadhaar number illegal");
                 return false;
             }
+
+            if (args.length==5)
+            {
+                Student student=new Student();
+                student.setName(name);
+                student.setGender(gender);
+                student.setID(aadharrId);
+                student.setMinus_count(Integer.parseInt(args[4]));
+                this.userArray.add(student);
+                System.out.println(student);
+                return true;
+            }
             User newUser = new User();
             newUser.setName(name);
             newUser.setGender(gender);
