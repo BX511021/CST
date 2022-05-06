@@ -85,6 +85,7 @@ public class Train_G extends Train {
         }
 
     }
+
     public int get_num(String s) {
         if (Objects.equals(s, "HC")) {
             return this.getHC_num();
@@ -113,6 +114,8 @@ public class Train_G extends Train {
         }
         return null;
     }
+
+
     public boolean check_num(String ticket_type,String num){
         if (Objects.equals(ticket_type, "HC")){
         }else if (Objects.equals(ticket_type, "SB")){
@@ -131,22 +134,25 @@ public class Train_G extends Train {
         }
 
         int num1=Integer.parseInt(num);
-        if (Objects.equals(ticket_type, "HC")){
-            if (this.HC_num<num1){
-                System.out.println("Ticket does not enough");
-                return false;
-            }
-        }else if (Objects.equals(ticket_type, "SB")){
-            if (this.SB_num<num1){
-                System.out.println("Ticket does not enough");
-                return false;
-            }
-        }
-        else if (Objects.equals(ticket_type, "SC")){
-            if (this.SC_num<num1){
-                System.out.println("Ticket does not enough");
-                return false;
-            }
+        switch (ticket_type) {
+            case "HC":
+                if (this.HC_num < num1) {
+                    System.out.println("Ticket does not enough");
+                    return false;
+                }
+                break;
+            case "SB":
+                if (this.SB_num < num1) {
+                    System.out.println("Ticket does not enough");
+                    return false;
+                }
+                break;
+            case "SC":
+                if (this.SC_num < num1) {
+                    System.out.println("Ticket does not enough");
+                    return false;
+                }
+                break;
         }
         return true;
     }

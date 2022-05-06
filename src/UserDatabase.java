@@ -207,9 +207,7 @@ class UserDatabase {
             }
             ArrayList<String> temp_list=this.SuperUser.My_Trains;
             Collections.reverse(temp_list);
-            Iterator<String> it=temp_list.iterator();
-            while (it.hasNext()){
-                String a1=it.next();
+            for (String a1 : temp_list) {
                 System.out.println(a1);
             }
         }
