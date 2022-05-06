@@ -8,6 +8,7 @@ public class Test {
         UserDatabase userDatabase = new UserDatabase();
         LineDataBase lineDataBase = new LineDataBase();
         TrainDataBase trainDataBase = new TrainDataBase();
+        Reader reader=new Reader();
         Scanner scan = new Scanner(System.in);
         boolean Brahman_mode=false;
         String argStr;
@@ -46,7 +47,7 @@ public class Test {
             }
 
             else {
-                CrossRoad.Cross_Z(argline,lineDataBase,trainDataBase,Brahman_mode,userDatabase);
+                CrossRoad.Cross_Z(argline,lineDataBase,trainDataBase,Brahman_mode,userDatabase,reader);
             }
 
         }

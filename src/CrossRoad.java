@@ -1,6 +1,6 @@
 public class CrossRoad {
 
-    public static void Cross_Z(String [] argsline,LineDataBase lineDataBase,TrainDataBase trainDataBase,boolean Brahman_mode,UserDatabase userDatabase){
+    public static void Cross_Z(String [] argsline,LineDataBase lineDataBase,TrainDataBase trainDataBase,boolean Brahman_mode,UserDatabase userDatabase,Reader reader){
 
         if (argsline[0].equals("addLine")||
                 argsline[0].equals("delLine")||
@@ -57,6 +57,8 @@ public class CrossRoad {
         }
         else if (argsline[0].equals("listOrder"))
             userDatabase.listOrder(argsline);
+        else if (argsline[0].equals("importCert"))
+            reader.readCsvByBufferedReader(argsline);
         else {
             System.out.println("Command does not exist");
         }
