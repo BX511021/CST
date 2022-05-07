@@ -281,12 +281,12 @@ class UserDatabase {
         }
 
 
-        if (args_line[4].equals("1A") || args_line[4].equals("2A")) {
-            if (reader.cert_map.get(this.SuperUser.getAadharrId()) == 'P' || reader.cert_map.get(this.SuperUser.getAadharrId()) == null) {
-                System.out.println("Cert illegal");
-                return;
-            }
-        }
+//        if (args_line[4].equals("1A") || args_line[4].equals("2A")) {
+//            if (reader.cert_map.get(this.SuperUser.getAadharrId()) == 'P' || reader.cert_map.get(this.SuperUser.getAadharrId()) == null) {
+//                System.out.println("Cert illegal");
+//                return;
+//            }
+//        }
 
         int ticket_num = Integer.parseInt(args_line[5]);
         temp_train.minus_num(args_line[4], ticket_num);
@@ -361,7 +361,134 @@ class UserDatabase {
 
     }
 
-    public void cancelOrder (String [] args_line){
+    public void cancelOrder (String [] args_line,TrainDataBase trainDataBase,LineDataBase lineDataBase){
+        if (args_line.length != 6) {
+            System.out.println("Arguments illegal");
+            return;
+        }
+
+        if (this.SuperUser == null) {
+            System.out.println("Please login first");
+            return;
+        }
+
+        ArrayList<String> temp_list = this.SuperUser.My_Trains;
+        Collections.reverse(temp_list);
+        boolean flag = false;
+        int sum=0;
+        for (String s : temp_list) {
+            String[] message = take_message(s);
+            if (Objects.equals(message[1], args_line[1]) && Objects.equals(message[2], args_line[2]) && Objects.equals(message[3], args_line[3]) && Objects.equals(message[4], args_line[4])) {
+                if (message[7].equals("T"))
+                    continue;
+                sum+=Integer.parseInt(message[5]);
+                flag=true;
+            }
+        }
+
+        if (!flag){
+            System.out.println("No such Record");
+            return;
+        }
+        int num_sum=Integer.parseInt(args_line[5]);
+        if (sum<num_sum)
+        {
+            System.out.println("No enough orders");
+            return;
+        }
+
+
+        Iterator<String> iterator=temp_list.iterator();
+        int count=0;
+        while (iterator.hasNext()){
+            String[] message = take_message(iterator.next());
+            if (Objects.equals(message[1], args_line[1]) && Objects.equals(message[2], args_line[2]) && Objects.equals(message[3], args_line[3]) && Objects.equals(message[4], args_line[4])) {
+                if (message[7].equals("T"))
+                    continue;
+                int neo_num=Integer.parseInt(message[5]);
+
+                if (num_sum>=neo_num){
+                    num_sum-=neo_num;
+                    Train temp_train=trainDataBase.Train_isExist(message[1]);
+                    temp_train.add_num(message[4],neo_num);
+                    neo_num=0;
+                    iterator.remove();
+                    count--;
+                }else {
+                    neo_num-=num_sum;
+                    Train temp_train=trainDataBase.Train_isExist(message[1]);
+                    temp_train.add_num(message[4],num_sum);
+                    num_sum=0;
+                    Double price = neo_num * (trainDataBase.ticket_price(args_line[2], args_line[3], temp_train, args_line[4], lineDataBase));
+                    String price_neo = new DecimalFormat(".00").format(price);
+                    String neo_train="[" + args_line[1] + ": " + args_line[2] + "->" + args_line[3] + "] " + "seat:" + args_line[4] + " " + "num:" + neo_num + " price:" + price_neo + " paid:" + "F";
+                    temp_list.set(count,neo_train);
+                }
+                if (num_sum==0){
+                    break;
+                }
+            }
+            count++;
+        }
+        this.SuperUser.My_Trains=temp_list;
+        Collections.reverse(this.SuperUser.My_Trains);
+        System.out.println("Cancel success");
+    }
+
+    public void payOrder(String [] args_line,TrainDataBase trainDataBase,LineDataBase lineDataBase){
+
+        if (args_line.length != 1) {
+            System.out.println("Arguments illegal");
+            return;
+        }
+        if (this.SuperUser == null) {
+            System.out.println("Please login first");
+            return;
+        }
+        if (this.SuperUser.My_Trains==null){
+            System.out.println("No order");
+            return;
+        }
+        ArrayList<String> temp_list=this.SuperUser.My_Trains;
+        Collections.reverse(temp_list);
+        int discount_num=this.SuperUser.getMinus_count();
+        double balance=this.SuperUser.balance;
+        double price_sum=0;
+        for (String s : temp_list) {
+            String[] message = take_message(s);
+            double price_minu=0.0;
+            if (Objects.equals(message[7], "T"))
+                continue;
+            price_sum += Double.parseDouble(message[6]);
+            int num=Integer.parseInt(message[5]);
+            Train temp_train=trainDataBase.Train_isExist(message[1]);
+            if (discount_num>=num){
+                price_minu += num * (trainDataBase.ticket_price(message[2], message[3], temp_train, message[4], lineDataBase));
+                discount_num-=num;
+            }else {
+                price_minu += discount_num * (trainDataBase.ticket_price(message[2], message[3], temp_train, message[4], lineDataBase));
+                discount_num=0;
+            }
+            price_sum-=price_minu;
+
+        }
+        if (price_sum>balance){
+            System.out.println("Balance does not enough");
+            return;
+        }
+
+
+        this.SuperUser.balance-=price_sum;
+        int num=0;
+        for (String s : temp_list) {
+            String neo_s=s.replace("paid:F","paid:T");
+            temp_list.set(num,neo_s);
+            num++;
+        }
+
+        this.SuperUser.My_Trains=temp_list;
+        Collections.reverse(this.SuperUser.My_Trains);
+        System.out.println("Payment success");
 
     }
 }

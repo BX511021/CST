@@ -1,20 +1,20 @@
 ## 启动
 
-- ### 线路控制
+### 线路控制
 
-- TunakTunakTun
+TunakTunakTun
 
-- listLine
+listLine
 
-- addLine sdhad6 89 ald 48 ashkd 2 alsdj 89
+addLine sdhad6 89 ald 48 ashkd 2 alsdj 89
 
-- addLine 14sda1 56 shak 9 asld 5 hasd 5
+addLine 14sda1 56 shak 9 asld 5 hasd 5
 
-- lineInfo 14sda1
+lineInfo 14sda1
 
-- NutKanutKanut
+NutKanutKanut
 
-- delLine 45
+delLine 45
 
 addStation sdhad6 hask 9
 
@@ -40,3 +40,41 @@ delTrain 0adhal5
 listTrain sdha
 
 checkTicket 0adhal5 ald ashkd CC
+
+
+
+
+
+```
+TunakTunakTun
+
+addLine Line13 4 Dazhongshi 28 Zhichunlu 30 Wudaokou 48 Shangdi 96 Xierqi 121 Longze 148
+
+addTrain K1151 Line13 22 90 7 120
+
+NutKanutKanut
+
+
+addUser LaoWang M 002301220991 6
+
+login 002301220991 LaoWang
+
+buyTicket K1151 Zhichunlu Wudaokou 1A 10
+buyTicket K1151 Dazhongshi Shangdi 2A 55
+buyTicket K1151 Zhichunlu Wudaokou 1A 15
+
+listOrder
+
+listTrain Line13
+
+cancelOrder K1151 Zhichnlu Wudaokou SB 11
+cancelOrder K1151 Zhichunlu Wudaokou 1A 66
+cancelOrder K1151 Zhichunlu Wudaokou 1A 5
+cancelOrder K1151 Zhichunlu Wudaokou 1A 11
+
+payOrder
+
+rechargeBalance 9999999.99
+
+checkBalance
+```

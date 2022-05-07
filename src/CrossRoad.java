@@ -65,6 +65,12 @@ public class CrossRoad {
         else if (argsline[0].equals("checkBalance")){
             userDatabase.checkBalance(argsline);
         }
+        else if (argsline[0].equals("cancelOrder")){
+            userDatabase.cancelOrder(argsline,trainDataBase,lineDataBase);
+        }
+        else if (argsline[0].equals("payOrder")){
+            userDatabase.payOrder(argsline,trainDataBase,lineDataBase);
+        }
         else {
             System.out.println("Command does not exist");
         }
