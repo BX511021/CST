@@ -5,10 +5,12 @@ class User {
     private char gender;
     private String aadharrId;
     public ArrayList<String> My_Trains;
+    public double balance;
 
     public void setName(String name) {
         this.name = name;
         this.My_Trains=new ArrayList<>();
+        this.balance=0;
     }
 
     public void setGender(char gender) {

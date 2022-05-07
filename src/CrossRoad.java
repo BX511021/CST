@@ -53,12 +53,18 @@ public class CrossRoad {
             userDatabase.logout(argsline);
         }
         else if (argsline[0].equals("buyTicket")){
-            userDatabase.buyTicket(argsline,trainDataBase,lineDataBase);
+            userDatabase.buyTicket(argsline,trainDataBase,lineDataBase,reader);
         }
         else if (argsline[0].equals("listOrder"))
             userDatabase.listOrder(argsline);
         else if (argsline[0].equals("importCert"))
             reader.readCsvByBufferedReader(argsline);
+        else if (argsline[0].equals("rechargeBalance")){
+            userDatabase.rechargeBalance(argsline);
+        }
+        else if (argsline[0].equals("checkBalance")){
+            userDatabase.checkBalance(argsline);
+        }
         else {
             System.out.println("Command does not exist");
         }

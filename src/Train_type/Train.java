@@ -31,6 +31,9 @@ public class Train {
         return null;
 
     }
+    public void add_num(String ticket_type,int num){
+        return;
+    }
     public static boolean isPureDigital(String string) {
         String regEx1 = "\\d+";
         Pattern p;

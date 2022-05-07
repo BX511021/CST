@@ -120,6 +120,18 @@ public class Train_0 extends Train{
             return null;
     }
 
+    public void   add_num(String ticket_type,int num) {
+        if (Objects.equals(ticket_type, "CC")) {
+            this.CC_num += num;
+
+        } else if (Objects.equals(ticket_type, "SB")) {
+            this.SB_num += num;
+
+        } else if (Objects.equals(ticket_type, "GG")) {
+            this.GG_num += num;
+        }
+    }
+
     public boolean check_num(String ticket_type,String num){
         if (Objects.equals(ticket_type, "CC")){
 

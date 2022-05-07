@@ -87,6 +87,13 @@ public class Train_K extends Train {
         }
         return null;
     }
+    public void add_num(String ticket_type,int num){
+        if (Objects.equals(ticket_type, "1A")){
+            this.A1_num+=num;
+        }else if (Objects.equals(ticket_type, "2A")){
+            this.A2_num+=num;
+        }
+    }
 
     public boolean check_num(String ticket_type,String num){
         if (Objects.equals(ticket_type, "1A")){
