@@ -1,18 +1,13 @@
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
-
-/**
- * BufferedReader ∂¡»°
- * @param
- * @return
- */
-
-
 public class Reader {
-    Map<String , Character> cert_map;
+    public Map<String , Character> cert_map=new HashMap<>();
+    int pos=0;
+    int neg=0;
 
     public Reader() {
-        this.cert_map = new HashMap<>();
+
     }
 
     public void readCsvByBufferedReader(String[] args_line) {
@@ -20,14 +15,14 @@ public class Reader {
             System.out.println("Arguments illegal");
             return;
         }
-        String filePath="data/"+args_line[1];
+        String filePath=args_line[1];
         File csv = new File(filePath);
         csv.setReadable(true);
         csv.setWritable(true);
         InputStreamReader isr = null;
         BufferedReader br = null;
         try {
-            isr = new InputStreamReader(new FileInputStream(csv), "gbk");
+            isr = new InputStreamReader(new FileInputStream(csv), StandardCharsets.UTF_8);
             br = new BufferedReader(isr);
         } catch (Exception e) {
             e.printStackTrace();
@@ -35,26 +30,25 @@ public class Reader {
         String line = "";
         String id="";
         char cert ;
-        int pos=0;
-        int neg=0;
         try {
             while ((line = br.readLine()) != null) {
-                System.out.print(line);
+//                System.out.print(line);
                 id=line.substring(0,11);
                 cert=line.toCharArray()[13];
                 if (cert=='N'){
-                    neg++;
+                    this.neg++;
                 }else {
-                    pos++;
+                    this.pos++;
                 }
-                System.out.println("  "+id+"  "+cert);
+
                 this.cert_map.put(id,cert);
+//                System.out.println(id+"  "+this.cert_map.get(id));
             }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        System.out.println("Import Success, Positive:"+pos+ " Negative:"+neg);
+        System.out.println("Import Success, Positive:"+this.pos+ " Negative:"+this.neg);
     }
 }

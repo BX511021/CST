@@ -25,12 +25,17 @@ class User {
     public int getMinus_count() {
         return 0;
     }
+    public void setMinus_count(int minus_count) {
+    }
+
 
     public void setName(String name) {
         this.name = name;
         this.My_Trains=new ArrayList<>();
         this.balance=0;
     }
+
+
 
     public void setGender(char gender) {
         this.gender = gender;

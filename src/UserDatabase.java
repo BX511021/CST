@@ -27,7 +27,7 @@ class UserDatabase {
         String[] message = new String[8];
         message[0]="nop";
         Matcher matcher;
-//火车ID
+
         String tid_pattern ="(\\D{2})(\\d{4}):";
         Pattern r = Pattern.compile(tid_pattern);
         matcher = r.matcher(train_message);
@@ -36,7 +36,7 @@ class UserDatabase {
 //            System.out.println(Train_id);
             message[1]=Train_id;
         }
-//起始站点
+
         String S_station=" ([a-zA-Z]+)-";
         Pattern s=Pattern.compile(S_station);
         matcher = s.matcher(train_message);
@@ -45,7 +45,7 @@ class UserDatabase {
 //            System.out.println(Starter);
             message[2]=Starter;
         }
-//终止站点
+
         String E_station=">([a-zA-Z]+)]";
         Pattern e=Pattern.compile(E_station);
         matcher = e.matcher(train_message);
@@ -54,7 +54,7 @@ class UserDatabase {
 //            System.out.println(Ender);
             message[3]=Ender;
         }
-//座位号码
+
         String seat_string="t:(\\S+)";
         Pattern se=Pattern.compile(seat_string);
         matcher = se.matcher(train_message);
@@ -63,10 +63,10 @@ class UserDatabase {
 //            System.out.println(seat);
             message[4]=seat;
         }
-//票数
+
         String num_string="m:(\\S+)";
         Pattern nu=Pattern.compile(num_string);
-        // 现在创建 matcher 对象
+
         matcher = nu.matcher(train_message);
         if (matcher.find( )) {
             String num=UserDatabase.trimFirstAndLastChar(matcher.group(0),"m",":");
@@ -76,7 +76,7 @@ class UserDatabase {
 
         String pirce_string="e:(\\S+)";
         Pattern pr=Pattern.compile(pirce_string);
-        // 现在创建 matcher 对象
+
         matcher = pr.matcher(train_message);
         if (matcher.find( )) {
             String price=UserDatabase.trimFirstAndLastChar(matcher.group(0),"e",":");
@@ -86,7 +86,7 @@ class UserDatabase {
 
         String paid_string="d:(\\S)";
         Pattern pa=Pattern.compile(paid_string);
-        // 现在创建 matcher 对象
+
         matcher = pa.matcher(train_message);
         if (matcher.find( )) {
             String paid=UserDatabase.trimFirstAndLastChar(matcher.group(0),"d",":");
@@ -281,12 +281,17 @@ class UserDatabase {
         }
 
 
-//        if (args_line[4].equals("1A") || args_line[4].equals("2A")) {
-//            if (reader.cert_map.get(this.SuperUser.getAadharrId()) == 'P' || reader.cert_map.get(this.SuperUser.getAadharrId()) == null) {
-//                System.out.println("Cert illegal");
-//                return;
-//            }
-//        }
+        if (args_line[4].equals("1A") || args_line[4].equals("2A")) {
+
+            if (reader.cert_map.get(this.SuperUser.getAadharrId()) == null ) {
+                System.out.println("Cert illegal");
+                return;
+            }
+            if (reader.cert_map.get(this.SuperUser.getAadharrId()) == 'P' ) {
+                System.out.println("Cert illegal");
+                return;
+            }
+        }
 
         int ticket_num = Integer.parseInt(args_line[5]);
         temp_train.minus_num(args_line[4], ticket_num);
@@ -354,7 +359,13 @@ class UserDatabase {
             System.out.println("Please login first");
 
         }
-        String price=new java.text.DecimalFormat("#.00").format(this.SuperUser.balance);
+        String price;
+        if (this.SuperUser.balance==0){
+            price="0.00";
+        }
+        else {
+            price=new java.text.DecimalFormat("#.00").format(this.SuperUser.balance);
+        }
 
         System.out.println("UserName:" + this.SuperUser.getName() + "\n" +
                 "Balance:" + price);
@@ -451,8 +462,10 @@ class UserDatabase {
         }
         ArrayList<String> temp_list=this.SuperUser.My_Trains;
         Collections.reverse(temp_list);
+
         int discount_num=this.SuperUser.getMinus_count();
         double balance=this.SuperUser.balance;
+
         double price_sum=0;
         for (String s : temp_list) {
             String[] message = take_message(s);
@@ -463,10 +476,10 @@ class UserDatabase {
             int num=Integer.parseInt(message[5]);
             Train temp_train=trainDataBase.Train_isExist(message[1]);
             if (discount_num>=num){
-                price_minu += num * (trainDataBase.ticket_price(message[2], message[3], temp_train, message[4], lineDataBase));
+                price_minu += 0.95*num * (trainDataBase.ticket_price(message[2], message[3], temp_train, message[4], lineDataBase));
                 discount_num-=num;
             }else {
-                price_minu += discount_num * (trainDataBase.ticket_price(message[2], message[3], temp_train, message[4], lineDataBase));
+                price_minu += 0.95*discount_num * (trainDataBase.ticket_price(message[2], message[3], temp_train, message[4], lineDataBase));
                 discount_num=0;
             }
             price_sum-=price_minu;
@@ -485,9 +498,9 @@ class UserDatabase {
             temp_list.set(num,neo_s);
             num++;
         }
-
+        this.SuperUser.setMinus_count(discount_num);
         this.SuperUser.My_Trains=temp_list;
-        Collections.reverse(this.SuperUser.My_Trains);
+//        Collections.reverse(this.SuperUser.My_Trains);
         System.out.println("Payment success");
 
     }
